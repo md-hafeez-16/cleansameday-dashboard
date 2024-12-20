@@ -1,4 +1,7 @@
 import React from "react";
+import CustTable from "../Components/Table";
+import { FaRegEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 const columns = [
   { label: "Customer Name", accessor: "customerName" },
@@ -15,7 +18,7 @@ const columns = [
         <FaRegEdit className="text-blue-500 hover:underline" size={16} />
         <MdDelete className="text-red-500 hover:underline" size={16} />
       </div>
-    ),
+    ), 
   },
 ];
 
