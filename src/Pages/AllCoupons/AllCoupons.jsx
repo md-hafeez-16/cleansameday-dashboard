@@ -1,7 +1,7 @@
 import React from "react";
-import CustTable from "../../Components/Table";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import CustTable from "../Components/Table";
 
 const columns = [
   { label: "Sl.no", accessor: "slno" },

@@ -8,6 +8,10 @@ import FlowSide from "./Pages/Components/FlowSide";
 import Costumer from "./Pages/Costumer/Costumer";
 import AllEvents from "./Pages/AllEvents/AllEvents";
 import AllTickets from "./Pages/AllTickets/AllTickets";
+import AllCoupons from "./Pages/AllCoupons/AllCoupons";
+import AddEvents from "./Pages/AllEvents/RelatedPages/AddEvents";
+import AddTickets from "./Pages/AllTickets/RelatedPages/AddTickets";
+import AddCoupons from "./Pages/AllCoupons/RelatedPages/AddCoupons";
 
 function App() {
   return (
@@ -20,8 +24,12 @@ function App() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="costumer" element={<Costumer />} />
               <Route path="events" element={<AllEvents />} />
+              <Route path="events/addEvents" element={<AddEvents />} />
               <Route path="tickets" element={<AllTickets />} />
-              {/* <Route path="coupons" element={<AllCoupons />} /> */}
+              <Route path="events/addTickets" element={<AddTickets />} />
+              <Route path="coupons" element={<AllCoupons />} />
+              <Route path="events/addCoupons" element={<AddCoupons />} />
+
               
             </Route>
           {/* </Route> */}
