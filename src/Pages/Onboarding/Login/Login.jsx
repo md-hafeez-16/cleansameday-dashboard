@@ -100,7 +100,7 @@ const Login = () => {
                   placeholder="Type your e-mail"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full mt-1 p-2"
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-lg"
                   aria-invalid={!!errors.email}
                 />
                 {errors.email && (
@@ -120,7 +120,7 @@ const Login = () => {
                     placeholder="Password"
                     value={formData.password}
                     onChange={handleChange}
-                    className="w-full mt-1 p-2"
+                    className="w-full mt-1 p-2 border border-gray-300 rounded-lg"
                     aria-invalid={!!errors.password}
                   />
                   <button
@@ -153,11 +153,11 @@ const Login = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-primary text-white  py-2 rounded-lg font-medium bg-black"
+                className="w-full bg-primary text-white  py-2 rounded-lg font-medium"
                 disabled={loading}
               >
-                {/* {loading ? "Logging in..." : "Login"} */}
-                login
+                {loading ? "Logging in..." : "Login"}
+                
               </button>
             </form>
 
