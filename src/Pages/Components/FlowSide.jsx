@@ -186,16 +186,16 @@ const FlowSide = () => {
           <div className="hidden lg:block">
             <div className="flex items-center gap-4">
               <div className="h-11 w-11 rounded-full bg-blue-gray-50 text-blue-gray-900 flex items-center justify-center text-2xl font-bold">
-                {user?.username?.charAt(0)}
+                {user?.username?.toUpperCase().charAt(0)}
               </div>
               <div>
                 <Typography color="white" variant="h6">
-                  {user?.username}
+                  {user?.username?.toUpperCase()}
                 </Typography>
                 <Typography
                   variant="small"
                   color="white"
-                  className=" font-semibold"
+                  className="text-xs font-semibold"
                 >
                   {user?.role}
                 </Typography>
