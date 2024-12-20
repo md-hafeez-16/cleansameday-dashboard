@@ -69,7 +69,7 @@ const FlowSide = () => {
       icon: <BsCalendarEventFill className="h-5 w-5" />,
       sublinks: [
         { name: "All Events", path: "events" },
-        { name: "Add Events", path: "events/addEvents" },
+        { name: "Add Events", path: "addevent" },
       ],
     },
     {

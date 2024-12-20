@@ -9,6 +9,7 @@ import Costumer from "./Pages/Costumer/Costumer";
 import AllEvents from "./Pages/AllEvents/AllEvents";
 import AllTickets from "./Pages/AllTickets/AllTickets";
 import { Toaster } from "react-hot-toast";
+import AddEvent from "./Pages/Addevents/AddEvent";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route path="events" element={<AllEvents />} />
               <Route path="tickets" element={<AllTickets />} />
               {/* <Route path="coupons" element={<AllCoupons />} /> */}
+              <Route path="addevent" element={<AddEvent />} />
               
             </Route>
           {/* </Route> */}
