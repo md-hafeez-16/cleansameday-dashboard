@@ -13,11 +13,15 @@ import AddEvents from "./Pages/AllEvents/RelatedPages/AddEvents";
 import AddTickets from "./Pages/AllTickets/RelatedPages/AddTickets";
 import AddCoupons from "./Pages/AllCoupons/RelatedPages/AddCoupons";
 import Bookings from "./Pages/Bookings/Bookings";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <div className="min-h-screen text-left">
+      
       <Router>
+      <Toaster
+          position="top-right"/>
         <Routes>
           <Route path="/" element={<Login />} />
           {/* <Route element={<ProtectedRoute />}> */}

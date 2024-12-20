@@ -34,6 +34,10 @@ const FlowSide = () => {
   const [open, setOpen] = useState(0);
   const location = useLocation();
 
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log("user", user);
+
   const pageTitles = {
     "/dashboard": "Dashboard",
   };
@@ -187,11 +191,12 @@ const FlowSide = () => {
             <div className="flex items-center gap-4">
               <div className="h-11 w-11 rounded-full bg-blue-gray-50 text-blue-gray-900 flex items-center justify-center text-2xl font-bold">
                 {/* {user.username.charAt(0)} */}
+                {user.username.charAt(0)}
               </div>
               <div>
                 <Typography color="white" variant="h6">
                   {/* {user.username} */}
-                  Username
+                  {user.username}
                 </Typography>
                 <Typography
                   variant="small"
@@ -199,7 +204,7 @@ const FlowSide = () => {
                   className=" font-semibold"
                 >
                   {/* {user.role} */}
-                  Role
+                  {user.role}
                 </Typography>
               </div>
             </div>
