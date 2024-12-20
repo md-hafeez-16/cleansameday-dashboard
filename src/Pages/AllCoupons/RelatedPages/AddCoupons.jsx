@@ -42,14 +42,13 @@ const AddCoupons = () => {
       endDate: formData.endDate ? format(formData.endDate, "yyyy-MM-dd") : null,
     };
     console.log("Data sent to backend:", backendData);
-
     try {
       const {data} = await axios.post(`${BASE_URL}/coupon/createCoupon`, backendData);
       console.log("data", data)
-      navigate("coupons")
+      navigate("/coupons")
     } catch (error) {
       console.log("error", error)
-      toast.error(error?.response?.data?.message)
+      toast.error(error?.response?.data?.msg)
     }
   };
 
@@ -60,7 +59,7 @@ const AddCoupons = () => {
         <div className="mb-4">
           <label
             htmlFor="name"
-            className="block text-sm font-semibold text-gray-700"
+            className="block text-xs font-semibold text-gray-700"
           >
             Coupon Name
           </label>
@@ -70,7 +69,7 @@ const AddCoupons = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="mt-2 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="mt-2 text-xs block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Coupon Name"
           />
         </div>
@@ -78,7 +77,7 @@ const AddCoupons = () => {
         <div className="mb-4">
           <label
             htmlFor="desc"
-            className="block text-sm font-semibold text-gray-700"
+            className="block text-xs font-semibold text-gray-700"
           >
             Description
           </label>
@@ -87,7 +86,7 @@ const AddCoupons = () => {
             name="desc"
             value={formData.desc}
             onChange={handleChange}
-            className="mt-2 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="mt-2 block text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Coupon Description"
           />
         </div>
@@ -96,7 +95,7 @@ const AddCoupons = () => {
           <div>
             <label
               htmlFor="discountPercentage"
-              className="block text-sm font-semibold text-gray-700"
+              className="block text-xs font-semibold text-gray-700"
             >
               Discount Percentage
             </label>
@@ -106,7 +105,7 @@ const AddCoupons = () => {
               name="discountPercentage"
               value={formData.discountPercentage}
               onChange={handleChange}
-              className="mt-2 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="mt-2 block text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Discount Percentage"
             />
           </div>
@@ -114,7 +113,7 @@ const AddCoupons = () => {
           <div>
             <label
               htmlFor="maxDiscount"
-              className="block text-sm font-semibold text-gray-700"
+              className="block text-xs font-semibold text-gray-700"
             >
               Max Discount
             </label>
@@ -124,7 +123,7 @@ const AddCoupons = () => {
               name="maxDiscount"
               value={formData.maxDiscount}
               onChange={handleChange}
-              className="mt-2 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="mt-2 block text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Max Discount"
             />
           </div>
@@ -134,7 +133,7 @@ const AddCoupons = () => {
           <div>
             <label
               htmlFor="startDate"
-              className="block text-sm font-semibold text-gray-700"
+              className="block text-xs font-semibold text-gray-700"
             >
               Start Date
             </label>
@@ -143,14 +142,14 @@ const AddCoupons = () => {
               onChange={(date) => handleDateChange(date, "startDate")}
               dateFormat="dd/MM/yyyy"
               placeholderText="DD/MM/YYYY"
-              className="mt-2 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="mt-2 block text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
 
           <div>
             <label
               htmlFor="endDate"
-              className="block text-sm font-semibold text-gray-700 "
+              className="block text-xs font-semibold text-gray-700 "
             >
               End Date
             </label>
@@ -159,7 +158,7 @@ const AddCoupons = () => {
               onChange={(date) => handleDateChange(date, "endDate")}
               dateFormat="dd/MM/yyyy"
               placeholderText="DD/MM/YYYY"
-              className="mt-2 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="mt-2 block text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
         </div>
@@ -167,7 +166,7 @@ const AddCoupons = () => {
         <div className="mb-4">
           <label
             htmlFor="numberOfCoupons"
-            className="block text-sm font-semibold text-gray-700"
+            className="block text-xs font-semibold text-gray-700"
           >
             Number of Coupons
           </label>
@@ -177,14 +176,14 @@ const AddCoupons = () => {
             name="numberOfCoupons"
             value={formData.numberOfCoupons}
             onChange={handleChange}
-            className="mt-2 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="mt-2 block text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Number of Coupons"
           />
         </div>
 
         <button
           type="submit"
-          className="w-full py-2 mt-4 text-white bg-primary hover:bg-[#012069e9] rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-bg-primary"
+          className="w-full py-2 mt-4 text-white bg-primary hover:bg-[#012069e9] rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-bg-primary text-xs"
         >
           Create Coupon
         </button>

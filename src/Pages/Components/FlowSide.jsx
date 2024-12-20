@@ -34,22 +34,18 @@ const FlowSide = () => {
   const [open, setOpen] = useState(0);
   const location = useLocation();
 
-
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log("user", user);
+  // console.log("user", user);
 
   const pageTitles = {
     "/dashboard": "Dashboard",
   };
 
-    useEffect(() => {
-      const currentPath = location.pathname;
-      const title = pageTitles[currentPath] || "ETB";
-      document.title = title;
-    }, [location]);
-
-  //   const user = JSON.parse(sessionStorage.getItem("user"));
-  //   console.log("user", user);
+  useEffect(() => {
+    const currentPath = location.pathname;
+    const title = pageTitles[currentPath] || "ETB";
+    document.title = title;
+  }, [location]);
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
   };
@@ -75,7 +71,7 @@ const FlowSide = () => {
       icon: <BsCalendarEventFill className="h-5 w-5" />,
       sublinks: [
         { name: "All Events", path: "events" },
-        { name: "Add Events", path: "events/addEvents" },
+        { name: "Add Events", path: "addEvents" },
       ],
     },
     {
@@ -83,7 +79,7 @@ const FlowSide = () => {
       icon: <IoTicketSharp className="h-5 w-5" />,
       sublinks: [
         { name: "All Tickets", path: "tickets" },
-        { name: "Add Tickets", path: "tickets/addTickets" },
+        { name: "Add Tickets", path: "addTickets" },
       ],
     },
     {
@@ -91,7 +87,7 @@ const FlowSide = () => {
       icon: <MdDiscount className="h-5 w-5" />,
       sublinks: [
         { name: "All Coupons", path: "coupons" },
-        { name: "Add Coupons", path: "coupons/addCoupons" },
+        { name: "Add Coupons", path: "addCoupons" },
       ],
     },
     {
@@ -103,9 +99,7 @@ const FlowSide = () => {
 
   const SidebarContent = () => (
     <Card className="h-full w-60 p-2 rounded-none border-r bg-white shadow-xl overflow-y-auto overflow-x-hidden">
-      <div className="mb-2"> 
-    {/* add logo here  */}
-      </div>
+      <div className="mb-2">{/* add logo here  */}</div>
       <List>
         {sidebarItems.map((item, index) => (
           <Accordion
@@ -157,7 +151,9 @@ const FlowSide = () => {
                       <ListItemPrefix>
                         <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                       </ListItemPrefix>
-                      <Typography className="mr-auto  font-semibold text-sm">{subLink.name}</Typography>
+                      <Typography className="mr-auto  font-semibold text-sm">
+                        {subLink.name}
+                      </Typography>
                     </Link>
                   ))}
                 </List>
@@ -190,21 +186,18 @@ const FlowSide = () => {
           <div className="hidden lg:block">
             <div className="flex items-center gap-4">
               <div className="h-11 w-11 rounded-full bg-blue-gray-50 text-blue-gray-900 flex items-center justify-center text-2xl font-bold">
-                {/* {user.username.charAt(0)} */}
-                {user.username.charAt(0)}
+                {user?.username?.charAt(0)}
               </div>
               <div>
                 <Typography color="white" variant="h6">
-                  {/* {user.username} */}
-                  {user.username}
+                  {user?.username}
                 </Typography>
                 <Typography
                   variant="small"
                   color="white"
                   className=" font-semibold"
                 >
-                  {/* {user.role} */}
-                  {user.role}
+                  {user?.role}
                 </Typography>
               </div>
             </div>
@@ -241,7 +234,7 @@ const FlowSide = () => {
       >
         <SidebarContent />
       </aside>
-      <div className="z-50 pt-12 lg:ml-56" >
+      <div className="z-50 pt-12 lg:ml-56">
         <Outlet />
       </div>
     </>

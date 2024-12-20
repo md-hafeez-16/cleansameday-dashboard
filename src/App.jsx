@@ -14,6 +14,7 @@ import AddTickets from "./Pages/AllTickets/RelatedPages/AddTickets";
 import AddCoupons from "./Pages/AllCoupons/RelatedPages/AddCoupons";
 import Bookings from "./Pages/Bookings/Bookings";
 import { Toaster } from "react-hot-toast";
+import EditCoupons from "./Pages/AllCoupons/RelatedPages/EditCoupons";
 
 function App() {
   return (
@@ -29,11 +30,12 @@ function App() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="customer" element={<Customer />} />
               <Route path="events" element={<AllEvents />} />
-              <Route path="events/addEvents" element={<AddEvents />} />
+              <Route path="addEvents" element={<AddEvents />} />
               <Route path="tickets" element={<AllTickets />} />
-              <Route path="tickets/addTickets" element={<AddTickets />} />
+              <Route path="addTickets" element={<AddTickets />} />
               <Route path="coupons" element={<AllCoupons />} />
-              <Route path="coupons/addCoupons" element={<AddCoupons />} />
+              <Route path="addCoupons" element={<AddCoupons />} />
+              <Route path="editCoupons/:id" element={<EditCoupons />} />
               <Route path="bookings" element={<Bookings />} />
             </Route>
           {/* </Route> */}
