@@ -5,13 +5,14 @@ import Login from "./Pages/Onboarding/Login/Login";
 import ProtectedRoute from "./Utils/ProtectedRoutes";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import FlowSide from "./Pages/Components/FlowSide";
-import Costumer from "./Pages/Costumer/Costumer";
+import Customer from "./Pages/Customer/Customer";
 import AllEvents from "./Pages/AllEvents/AllEvents";
 import AllTickets from "./Pages/AllTickets/AllTickets";
 import AllCoupons from "./Pages/AllCoupons/AllCoupons";
 import AddEvents from "./Pages/AllEvents/RelatedPages/AddEvents";
 import AddTickets from "./Pages/AllTickets/RelatedPages/AddTickets";
 import AddCoupons from "./Pages/AllCoupons/RelatedPages/AddCoupons";
+import Bookings from "./Pages/Bookings/Bookings";
 
 function App() {
   return (
@@ -22,15 +23,14 @@ function App() {
           {/* <Route element={<ProtectedRoute />}> */}
             <Route element={<FlowSide />}>
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="costumer" element={<Costumer />} />
+              <Route path="customer" element={<Customer />} />
               <Route path="events" element={<AllEvents />} />
               <Route path="events/addEvents" element={<AddEvents />} />
               <Route path="tickets" element={<AllTickets />} />
-              <Route path="events/addTickets" element={<AddTickets />} />
+              <Route path="tickets/addTickets" element={<AddTickets />} />
               <Route path="coupons" element={<AllCoupons />} />
-              <Route path="events/addCoupons" element={<AddCoupons />} />
-
-              
+              <Route path="coupons/addCoupons" element={<AddCoupons />} />
+              <Route path="bookings" element={<Bookings />} />
             </Route>
           {/* </Route> */}
         </Routes>

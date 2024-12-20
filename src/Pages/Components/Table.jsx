@@ -23,7 +23,7 @@ const CustTable = ({ columns, data, className }) => {
               {columns.map((col) => (
                 <td
                   key={col.accessor}
-                  className="px-6 py-4 whitespace-nowrap text-xs text-gray-900"
+                  className="px-6 py-3 whitespace-nowrap text-xs text-gray-900"
                 >
                   {col.render ? col.render(row[col.accessor], row) : row[col.accessor]}
                 </td>

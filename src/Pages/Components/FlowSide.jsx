@@ -27,6 +27,7 @@ import { BsCalendarEventFill } from "react-icons/bs";
 import { IoTicketSharp } from "react-icons/io5";
 import { MdDiscount } from "react-icons/md";
 import { FaPowerOff } from "react-icons/fa";
+import { FaListAlt } from "react-icons/fa";
 
 const FlowSide = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -56,9 +57,14 @@ const FlowSide = () => {
       path: "/dashboard",
     },
     {
-      label: "Costumer",
+      label: "Customer",
       icon: <FaPeopleGroup className="h-5 w-5" />,
-      path: "/costumer",
+      path: "/customer",
+    },
+    {
+      label: "Bookings",
+      icon: <FaListAlt className="h-5 w-5" />,
+      path: "/bookings",
     },
     {
       label: "Events",
