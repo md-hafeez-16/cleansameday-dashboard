@@ -6,7 +6,7 @@ const CustTable = ({ columns, data, className }) => {
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50 ">
           <tr>
-            {columns.map((col) => (
+            {columns?.map((col) => (
               <th
                 key={col.accessor}
                 scope="col"
@@ -18,12 +18,12 @@ const CustTable = ({ columns, data, className }) => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {data.map((row, rowIndex) => (
+          {data?.map((row, rowIndex) => (
             <tr key={rowIndex} className="hover:bg-gray-100 text-center">
               {columns.map((col) => (
                 <td
                   key={col.accessor}
-                  className="px-6 py-4 whitespace-nowrap text-xs text-gray-900"
+                  className="px-6 py-3 whitespace-nowrap text-xs text-gray-900"
                 >
                   {col.render ? col.render(row[col.accessor], row) : row[col.accessor]}
                 </td>
