@@ -9,7 +9,12 @@ function App() {
     <div className="bg-blue-gray-50 min-h-screen">
       <Router>
         <Routes>
-        <Route path="/" element={<Login />} />
+          <Route path="/" element={<Login />} />
+          <Route element={<ProtectedRoute />}>
+            <Route element={<FlowSide />}>
+              <Route path="dashboard" element={<Dashboard />} />
+            </Route>
+          </Route>
         </Routes>
       </Router>
     </div>
