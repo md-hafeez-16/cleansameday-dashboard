@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { BASE_URL } from "../../../constants";
 import { format } from "date-fns";
+import toast from "react-hot-toast";
 
 const EditCoupons = () => {
   const [couponDetails, setCouponDetails] = useState({
@@ -15,7 +16,7 @@ const EditCoupons = () => {
     endDate: "",
     numberOfCoupons: "",
   });
-
+  const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
@@ -68,11 +69,15 @@ const EditCoupons = () => {
         ? format(couponDetails.endDate, "yyyy-MM-dd")
         : null,
     };
-
     console.log("payload", payload);
     try {
-      const { data } = await axios.patch(`${BASE_URL}/coupon/updateCoupon`, payload);
-console.log("data", data)
+      const { data } = await axios.post(
+        `${BASE_URL}/coupon/updateCoupon`,
+        payload
+      );
+      console.log("data", data);
+      toast.success("Coupon updated successfully");
+      navigate("/coupons")
     } catch (error) {
       console.log("error", error);
       alert("Failed to update coupon. Please try again.");

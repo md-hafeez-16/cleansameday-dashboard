@@ -42,7 +42,6 @@ const AllCoupons = () => {
       label: "Actions",
       accessor: "actions",
       render: (value, row) => (
-        console.log("value", value),
         <div className="flex gap-2 justify-center items-center cursor-pointer">
           <FaRegEdit
             className="text-blue-500 hover:underline"

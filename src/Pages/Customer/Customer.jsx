@@ -40,8 +40,9 @@ const Customer = () => {
   },[]);
 
   const data = allCustomer.map((customer) => ({
-    customerName: `${customer.firstName} ${customer.lastName}`, 
-    email: customer.user.email, 
+    customerName: `${customer?.firstName} ${customer?.lastName}`,
+    phone: customer?.user?.phone,
+    email: customer?.user?.email, 
     // actions: null, 
   }));
 
