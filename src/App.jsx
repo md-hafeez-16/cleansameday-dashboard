@@ -8,11 +8,15 @@ import FlowSide from "./Pages/Components/FlowSide";
 import Costumer from "./Pages/Costumer/Costumer";
 import AllEvents from "./Pages/AllEvents/AllEvents";
 import AllTickets from "./Pages/AllTickets/AllTickets";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <div className="min-h-screen text-left">
+      
       <Router>
+      <Toaster
+          position="top-right"/>
         <Routes>
           <Route path="/" element={<Login />} />
           {/* <Route element={<ProtectedRoute />}> */}
