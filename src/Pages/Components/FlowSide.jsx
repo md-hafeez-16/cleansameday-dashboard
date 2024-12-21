@@ -61,11 +61,11 @@ const FlowSide = () => {
       icon: <FaPeopleGroup className="h-5 w-5" />,
       path: "/customer",
     },
-    {
-      label: "Bookings",
-      icon: <FaListAlt className="h-5 w-5" />,
-      path: "/bookings",
-    },
+    // {
+    //   label: "Bookings",
+    //   icon: <FaListAlt className="h-5 w-5" />,
+    //   path: "/bookings",
+    // },
     {
       label: "Events",
       icon: <BsCalendarEventFill className="h-5 w-5" />,
@@ -78,7 +78,7 @@ const FlowSide = () => {
       label: "Tickets",
       icon: <IoTicketSharp className="h-5 w-5" />,
       sublinks: [
-        { name: "All Tickets", path: "tickets" },
+        { name: "All Bookings", path: "bookings" },
         { name: "Add Tickets", path: "addTickets" },
       ],
     },
@@ -170,7 +170,7 @@ const FlowSide = () => {
       <Navbar
         color="transparent"
         fullWidth
-        className="border-b shadow-none rounded-none fixed left-0 top-0 z-50 bg-primary px-10"
+        className="border-b shadow-none max-w-screen rounded-none fixed left-0 top-0 z-50 bg-primary px-10"
       >
         <div className="mx-auto flex items-center justify-between text-primary">
           <div className="flex items-center justify-center gap-1 cursor-pointer">
