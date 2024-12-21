@@ -13,7 +13,7 @@ const AddEvents = () => {
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6 text-primary">Add Event</h1>
+      <h1 className="text-xl font-bold mb-4 text-primary">Add Event</h1>
       <div className="space-y-6">
         {/* Row 1 */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -120,8 +120,6 @@ const AddEvents = () => {
             ))}
           </div>
         </div>
-
-        {/* Submit Button */}
         <button className="w-full py-2 mt-4 text-white bg-primary hover:bg-[#012069e9] rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-bg-primary text-xs">
           Submit
         </button>
