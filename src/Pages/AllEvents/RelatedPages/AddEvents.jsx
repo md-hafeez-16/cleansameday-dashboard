@@ -184,9 +184,12 @@ const AddEvents = () => {
             <label className="block text-xs font-semibold text-gray-700">
               Time Slots
             </label>
-            <div className="space-y-2">
+            <div className="space-y-2 ">
               {timeSlots.map((timeSlot, index) => (
-                <div key={index} className="flex items-center space-x-4">
+                <div
+                  key={index}
+                  className="flex items-center space-x-4 flex-nowrap"
+                >
                   <select
                     value={timeSlot.type}
                     onChange={(e) =>
@@ -228,15 +231,15 @@ const AddEvents = () => {
                   >
                     <Minus />
                   </button>
+                  <button
+                    type="button"
+                    onClick={addTimeSlot}
+                    className="text-xs text-indigo-600 hover:underline"
+                  >
+                    <Plus />
+                  </button>
                 </div>
               ))}
-              <button
-                type="button"
-                onClick={addTimeSlot}
-                className="text-xs text-indigo-600 hover:underline"
-              >
-                <Plus />
-              </button>
             </div>
           </div>
 
