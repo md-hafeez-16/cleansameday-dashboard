@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const AddEvents = () => {
   const [eventName, setEventName] = useState("");
@@ -18,102 +18,111 @@ const AddEvents = () => {
         {/* Row 1 */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div>
-            <label className="block font-semibold">Event Name</label>
+            <label className="block text-xs font-semibold text-gray-700">
+              Event Name
+            </label>
             <input
               value={eventName}
               onChange={(e) => setEventName(e.target.value)}
               type="text"
               placeholder="Enter Event Name"
-              className="w-full mt-1 p-2 border border-gray-300 rounded-lg"
+              className="mt-2 text-xs block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label className="block font-semibold">Event Venue</label>
+            <label className="block text-xs font-semibold text-gray-700">
+              Event Venue
+            </label>
             <input
               type="text"
               value={eventVenue}
               onChange={(e) => setEventVenue(e.target.value)}
               placeholder="Enter Event Venue"
-              className="w-full mt-1 p-2 border border-gray-300 rounded-lg"
+              className="mt-2 text-xs block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label className="block font-semibold">Event Date</label>
+            <label className="block text-xs font-semibold text-gray-700">
+              Event Date
+            </label>
             <input
               type="date"
               value={eventDate}
               onChange={(e) => setEventDate(e.target.value)}
-              className="w-full mt-1 p-2 border border-gray-300 rounded-lg"
+              className="mt-2 text-xs block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label className="block font-semibold">Celebrity</label>
+            <label className="block text-xs font-semibold text-gray-700">
+              Celebrity
+            </label>
             <input
               type="text"
               value={celebrity}
               onChange={(e) => setCelebrity(e.target.value)}
-
               placeholder="Enter Celebrity Name"
-              className="w-full mt-1 p-2 border border-gray-300 rounded-lg"
+              className="mt-2 text-xs block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
         </div>
 
         {/* Row 2 */}
         <div>
-          <label className="block font-semibold">Event Description</label>
+          <label className="block text-xs font-semibold text-gray-700">
+            Event Description
+          </label>
           <textarea
             placeholder="Enter Event Description"
             value={eventDescription}
             onChange={(e) => setEventDescription(e.target.value)}
-            className="w-full mt-1 p-2 border border-gray-300 rounded-lg"
+            className="mt-2 text-xs block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             rows="4"
           />
         </div>
 
         {/* Row 3 */}
         <div>
-          <label className="block font-semibold">Banner Image URL</label>
+          <label className="block text-xs font-semibold text-gray-700">
+            Banner Image URL
+          </label>
           <input
             type="file"
             value={bannerImageURL}
-
             placeholder="Enter Banner Image URL"
-            className="w-full mt-1 p-2 border border-gray-300 rounded-lg"
+            className="mt-2 text-xs block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
 
         {/* Row 4 */}
         <div>
-          <label className="block font-semibold">Time Slots</label>
+          <label className="block text-xs font-semibold text-gray-700">
+            Time Slots
+          </label>
           <div className="space-y-2">
-           {
-              timeSlots.map((timeSlot, index) => (
-                <div key={index} className="flex items-center space-x-4">
-                  <input
-                    type="text"
-                    placeholder="Start Time"
-                    className="flex-1 p-2 border border-gray-300 rounded-lg"
-                  />
-                  <input
-                    type="text"
-                    placeholder="End Time"
-                    className="flex-1 p-2 border border-gray-300 rounded-lg"
-                  />  
-                  <input
-                    type="text"
-                    placeholder="Available Slots"
-                    className="flex-1 p-2 border border-gray-300 rounded-lg"  
-                  />
-                </div>   
-              ))
-           }
-            
+            {timeSlots.map((timeSlot, index) => (
+              <div key={index} className="flex items-center space-x-4">
+                <input
+                  type="text"
+                  placeholder="Start Time"
+                  className="mt-2 text-xs block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+                <input
+                  type="text"
+                  placeholder="End Time"
+                  className="mt-2 text-xs block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+                <input
+                  type="text"
+                  placeholder="Available Slots"
+                  className="mt-2 text-xs block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Submit Button */}
-        <button className="px-4 py-2 bg-primary text-white rounded-lg">
+        <button className="w-full py-2 mt-4 text-white bg-primary hover:bg-[#012069e9] rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-bg-primary text-xs">
           Submit
         </button>
       </div>

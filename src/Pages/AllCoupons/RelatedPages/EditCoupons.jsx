@@ -5,7 +5,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { BASE_URL } from "../../../constants";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
-
 const EditCoupons = () => {
   const [couponDetails, setCouponDetails] = useState({
     name: "",
