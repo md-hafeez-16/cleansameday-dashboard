@@ -231,15 +231,15 @@ const EditEvents = () => {
                   >
                     <Minus />
                   </button>
+                  <button
+                    type="button"
+                    onClick={addTimeSlot}
+                    className="text-xs text-indigo-600 hover:underline"
+                  >
+                    <Plus />
+                  </button>
                 </div>
               ))}
-              <button
-                type="button"
-                onClick={addTimeSlot}
-                className="text-xs text-indigo-600 hover:underline"
-              >
-                <Plus />
-              </button>
             </div>
           </div>
 
