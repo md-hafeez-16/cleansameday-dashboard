@@ -3,6 +3,7 @@ import React from "react";
 const CustTable = ({ columns, data, className }) => {
   return (
     <div className={`w-full ${className}`}>
+    <div className="overflow-x-auto custom-scrollbar">
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50 ">
           <tr>
@@ -33,6 +34,8 @@ const CustTable = ({ columns, data, className }) => {
         </tbody>
       </table>
     </div>
+  </div>
+  
   );
 };
 
