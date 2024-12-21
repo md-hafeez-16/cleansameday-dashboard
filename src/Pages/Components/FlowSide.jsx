@@ -61,11 +61,6 @@ const FlowSide = () => {
       icon: <FaPeopleGroup className="h-5 w-5" />,
       path: "/customer",
     },
-    // {
-    //   label: "Bookings",
-    //   icon: <FaListAlt className="h-5 w-5" />,
-    //   path: "/bookings",
-    // },
     {
       label: "Events",
       icon: <BsCalendarEventFill className="h-5 w-5" />,
