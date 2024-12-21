@@ -24,7 +24,7 @@ function App() {
         <Routes>
           {/* Public route */}
           <Route path="/" element={<Login />} />
-          
+
           {/* Protected routes */}
           <Route element={<ProtectedRoute />}>
             <Route element={<FlowSide />}>

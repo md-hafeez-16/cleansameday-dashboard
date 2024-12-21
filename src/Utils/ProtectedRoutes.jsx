@@ -3,8 +3,9 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoute = () => {
   const user = JSON.parse(sessionStorage.getItem("user"));
+  console.log("protected",user)
 
-  if (!user || user.status !== "ACTIVE" || user.role !== "ADMIN") {
+  if (!user || user.status !== "ACTIVE") {
     return <Navigate to="/" replace />;
   }
 
