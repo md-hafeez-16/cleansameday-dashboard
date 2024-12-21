@@ -20,7 +20,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@heroicons/react/24/outline";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { RiDashboardFill } from "react-icons/ri";
 import { BsCalendarEventFill } from "react-icons/bs";
@@ -32,13 +32,17 @@ import { FaListAlt } from "react-icons/fa";
 const FlowSide = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [open, setOpen] = useState(0);
+  const [dialogOpen, setDialogOpen] = useState(false); // State for dialog
   const location = useLocation();
+
+  const navigate= useNavigate()
 
   const user = JSON.parse(localStorage.getItem("user"));
   // console.log("user", user);
 
   const pageTitles = {
     "/dashboard": "Dashboard",
+    "/customer": "Customer",
   };
 
   useEffect(() => {
@@ -46,20 +50,39 @@ const FlowSide = () => {
     const title = pageTitles[currentPath] || "ETB";
     document.title = title;
   }, [location]);
+
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
   };
+
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+
+  const handleLogoutClick = () => {
+    setDialogOpen(true); // Open the dialog on clicking "Log Out"
+  };
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false); // Close the dialog
+  };
+
+  const handleConfirmLogout = () => {
+    setDialogOpen(false); // Close the dialog after confirmation
+    localStorage.clear()
+    navigate("/")
+
+    
+  };
+
   const sidebarItems = [
     {
       label: "Home",
       icon: <RiDashboardFill className="h-5 w-5" />,
-      path: "/dashboard",
+      path: "/dashboard", // Correct path for Home
     },
     {
       label: "Customer",
       icon: <FaPeopleGroup className="h-5 w-5" />,
-      path: "/customer",
+      path: "/customer", // Correct path for Customer
     },
     {
       label: "Events",
@@ -88,13 +111,13 @@ const FlowSide = () => {
     {
       label: "Log Out",
       icon: <FaPowerOff className="h-5 w-5" />,
-      // onClick: handleLogout,
+      onClick: handleLogoutClick,
     },
   ];
 
   const SidebarContent = () => (
     <Card className="h-full w-60 p-2 rounded-none border-r bg-white shadow-xl overflow-y-auto overflow-x-hidden">
-      <div className="mb-2">{/* add logo here  */}</div>
+      <div className="mb-2">{/* add logo here */}</div>
       <List>
         {sidebarItems.map((item, index) => (
           <Accordion
@@ -118,17 +141,18 @@ const FlowSide = () => {
                   className="border-b-0 p-3 cursor-pointer text-primary hover:text-blue-gray-900"
                 >
                   <ListItemPrefix>{item.icon}</ListItemPrefix>
-                  <Typography className="mr-auto  font-semibold text-sm">
+                  <Typography className="mr-auto font-semibold text-sm">
                     {item.label}
                   </Typography>
                 </AccordionHeader>
               ) : (
                 <Link
-                  to={item.path}
-                  className="w-full flex items-center p-3 text-sm no-underline text-primary hover:text-blue-gray-900"
+                  to={item.path} // Use the correct path here
+                  onClick={item.onClick}
+                  className="w-full flex items-center p-3 text-sm no-underline text-primary hover:text-blue-gray-900 cursor-pointer"
                 >
                   <ListItemPrefix>{item.icon}</ListItemPrefix>
-                  <Typography className="mr-auto  font-semibold text-sm">
+                  <Typography className="mr-auto font-semibold text-sm">
                     {item.label}
                   </Typography>
                 </Link>
@@ -146,7 +170,7 @@ const FlowSide = () => {
                       <ListItemPrefix>
                         <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                       </ListItemPrefix>
-                      <Typography className="mr-auto  font-semibold text-sm">
+                      <Typography className="mr-auto font-semibold text-sm">
                         {subLink.name}
                       </Typography>
                     </Link>
@@ -162,6 +186,31 @@ const FlowSide = () => {
 
   return (
     <>
+      {/* Confirmation Dialog */}
+      {dialogOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-lg font-semibold mb-4">
+              Are you sure you want to log out?
+            </h2>
+            <div className="flex justify-end gap-4">
+              <button
+                onClick={handleCloseDialog}
+                className="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirmLogout}
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+              >
+                Log Out
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <Navbar
         color="transparent"
         fullWidth
@@ -211,16 +260,16 @@ const FlowSide = () => {
             )}
           </IconButton>
         </div>
-      </Navbar>{" "}
+      </Navbar>
       {/* Drawer for mobile screens */}
       <Drawer
         open={isSidebarOpen}
         onClose={toggleSidebar}
-        className="lg:hidden  w-64  rounded-none shadow-none border-r"
+        className="lg:hidden w-64 sm:w-56 md:w-60 lg:w-64  rounded-none shadow-none border-r"
         placement="left"
       >
         <SidebarContent />
-      </Drawer>{" "}
+      </Drawer>
       {/* Sidebar for larger screens */}
       <aside
         id="logo-sidebar"
@@ -235,4 +284,5 @@ const FlowSide = () => {
     </>
   );
 };
+
 export default FlowSide;

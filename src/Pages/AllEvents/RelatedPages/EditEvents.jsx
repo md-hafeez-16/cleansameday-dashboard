@@ -4,6 +4,7 @@ import { Minus, Plus } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BASE_URL } from "../../../constants";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const EditEvents = () => {
   const { id } = useParams();
@@ -52,8 +53,6 @@ const EditEvents = () => {
     }
   };
 
-  console.log(timeSlots);
-
   useEffect(() => {
     fetchEvent();
   }, [id]);
@@ -81,10 +80,40 @@ const EditEvents = () => {
     setBannerImageURL(url);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const reqBody = {
+      name: eventName,
+      desc: eventDescription,
+      date: eventDate,
+      time: eventTime,
+      venue: eventVenue,
+      celebrity,
+      bannerImage: bannerImageURL,
+      ticketPricing: timeSlots,
+    };
+
+    console.log("Request Body: ", reqBody);
+
+    try {
+      const res = await axios.post(
+        `${BASE_URL}/event/updateEvent/${id}`,
+        reqBody
+      );
+      console.log("Response: ", res.data);
+      toast.success("Event Updated Successfully");
+      navigate(`/events`);
+    } catch (error) {
+      console.error("Error: ", error);
+      toast.error("Failed to Update Event");
+    }
+  };
+
   return (
     <div className="p-6 max-w-6xl mx-auto">
       <h1 className="text-xl font-bold mb-4 text-primary">Edit Event</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="space-y-6">
           {/* Row 1 */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -154,7 +183,18 @@ const EditEvents = () => {
                 placeholder="Enter Event Name"
                 className="mt-2 text-xs block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
+
+              {bannerImageURL ? (
+                <img
+                  src={bannerImageURL}
+                  alt="Profile"
+                  className="w-32 h-32 object-cover  ml-5 mt-3"
+                />
+              ) : (
+                <p className="mt-2 text-xs block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">No image selected</p>
+              )}
             </div>
+
             <div>
               <label className="block text-xs font-semibold text-gray-700">
                 Event Date

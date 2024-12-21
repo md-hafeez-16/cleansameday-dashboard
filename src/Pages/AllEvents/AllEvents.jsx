@@ -5,19 +5,21 @@ import CustTable from "../Components/Table";
 import axios from "axios";
 import { BASE_URL } from "../../constants";
 import { useNavigate } from "react-router-dom";
+import Pagination from "../Components/Pagination";
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
-  const[ id,setId]=useState(null)
+  const [id, setId] = useState(null);
+  const [dialogOpen, setDialogOpen] = useState(false); // Controls modal visibility
   const navigate = useNavigate();
-
-  
+  const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
   const fetchAllEvents = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/event/getAllEventsPagination`);
+      const res = await axios.get(`${BASE_URL}/event/getAllEventsPagination?page=${page}&pageSize=10`);
       const fetchedEvents = res.data.events.map((event, index) => ({
-        id: event.id, // Include ID here
+        id: event.id,
         slno: index + 1,
         eventName: event.name,
         eventDate: new Date(event.date).toISOString().split("T")[0],
@@ -29,22 +31,30 @@ const AllEvents = () => {
         actions: event,
       }));
       setEvents(fetchedEvents);
+      setTotalPages(res?.pagination?.totalPages);
     } catch (error) {
       console.error("Error fetching events:", error);
     }
   };
 
+  const handleOpenDialog = (id) => {
+    setId(id);
+    setDialogOpen(true);
+  };
 
-  const handleDelete = async (event) => {
-    console.log(event);
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
+
+  const handleDelete = async () => {
     try {
-      await axios.delete(`${BASE_URL}/event/deleteEvent/${event}`);
+      await axios.delete(`${BASE_URL}/event/deleteEvent/${id}`);
       fetchAllEvents();
+      handleCloseDialog(); // Close modal after deletion
     } catch (error) {
       console.error("Error deleting event:", error);
     }
   };
-
 
   const columns = [
     { label: "Sl.no", accessor: "slno" },
@@ -58,45 +68,77 @@ const AllEvents = () => {
     {
       label: "Actions",
       accessor: "actions",
-      render: (value, row) => (
+      render: (value) => (
         <div className="flex gap-2 justify-center items-center cursor-pointer">
-          {/* Edit Action */}
           <FaRegEdit
             className="text-blue-500 hover:underline"
             size={16}
             onClick={() => navigate(`/editEvents/${value._id}`)}
           />
-          {/* Delete Action */}
           <MdDelete
             className="text-red-500 hover:underline"
             size={16}
-            onClick={() => handleDelete(value._id)}
+            onClick={() => handleOpenDialog(value._id)}
           />
         </div>
       ),
     },
   ];
 
- 
-
   useEffect(() => {
     fetchAllEvents();
   }, []);
 
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-4 text-primary">All Events</h1>
-      {events?.length > 0 ? (
-        <CustTable
-          columns={columns}
-          data={events}
-          className="shadow-lg rounded-lg"
+    <>
+      <div className="p-4">
+        <h1 className="text-xl font-bold mb-4 text-primary">All Events</h1>
+        {events?.length > 0 ? (
+          <CustTable
+            columns={columns}
+            data={events}
+            className="shadow-lg rounded-lg"
+          />
+        ) : (
+          <h1 className="mb-4 text-primary">No events found</h1>
+        )}
+      </div>
+
+
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
         />
-      ) : (
-        <h1 className="mb-4 text-primary">No events found</h1>
       )}
-    </div>
+
+      {dialogOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-lg font-semibold mb-4">
+              Are you sure you want to delete this event?
+            </h2>
+            <div className="flex justify-end gap-4">
+              <button
+                onClick={handleCloseDialog}
+                className="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDelete}
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
 export default AllEvents;
+

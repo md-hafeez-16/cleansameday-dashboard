@@ -18,8 +18,7 @@ const AddEvents = () => {
     { type: "", price: "", availableTickets: "" },
   ]);
 
-
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const handleTimeSlotChange = (index, field, value) => {
     const updatedTimeSlots = [...timeSlots];
@@ -55,12 +54,11 @@ const AddEvents = () => {
     try {
       const res = await axios.post(`${BASE_URL}/event/createEvent`, reqBody);
       console.log("Response: ", res.data);
-     toast.success("Event Added Successfully");
-     navigate(`/events`)
-     
+      toast.success("Event Added Successfully");
+      navigate(`/events`);
     } catch (error) {
       console.error("Error: ", error);
-      toast.error("Failed to Add Event")
+      toast.error("Failed to Add Event");
     }
   };
 
@@ -138,13 +136,21 @@ const AddEvents = () => {
                 Image
               </label>
               <input
-               
                 onChange={handleImageChange}
                 type="file"
                 accept="image/*"
                 placeholder="Enter Event Name"
                 className="mt-2 text-xs block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
+              {bannerImageURL ? (
+                <img
+                  src={bannerImageURL}
+                  alt="Profile"
+                  className="w-32 h-32 object-cover  ml-5 mt-3"
+                />
+              ) : (
+                <p className="mt-2 text-xs block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">No image selected</p>
+              )}
             </div>
             <div>
               <label className="block text-xs font-semibold text-gray-700">
@@ -220,7 +226,7 @@ const AddEvents = () => {
                     onClick={() => removeTimeSlot(index)}
                     className="text-xs text-red-600 hover:underline"
                   >
-                    <Minus/> 
+                    <Minus />
                   </button>
                 </div>
               ))}
@@ -229,7 +235,7 @@ const AddEvents = () => {
                 onClick={addTimeSlot}
                 className="text-xs text-indigo-600 hover:underline"
               >
-                <Plus/>
+                <Plus />
               </button>
             </div>
           </div>
