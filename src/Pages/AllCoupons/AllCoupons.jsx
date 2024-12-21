@@ -14,7 +14,7 @@ const AllCoupons = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [id, setId] = useState(null);
+  const [couponID, setCouponID] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -56,12 +56,14 @@ const AllCoupons = () => {
           <FaRegEdit
             className="text-blue-500 hover:underline"
             size={16}
-            onClick={() => navigate(`/editCoupons/${value._id}`)}
+            onClick={() => navigate(`/editCoupons/${value?._id}`)}
           />
           <MdDelete
             className="text-red-500 hover:underline"
             size={16}
-            onClick={() => handleOpenDialog(value._id)}
+            onClick={() => {
+              handleOpenDialog(value);
+            }}
           />
         </div>
       ),
@@ -80,8 +82,8 @@ const AllCoupons = () => {
     actions: coupon,
   }));
 
-  const handleOpenDialog = (id) => {
-    setId(id);
+  const handleOpenDialog = (value) => {
+    setCouponID(value?._id);
     setDialogOpen(true);
   };
 
@@ -91,7 +93,7 @@ const AllCoupons = () => {
 
   const handleDelete = async () => {
     try {
-      // await axios.delete(`${BASE_URL}/event/deleteEvent/${id}`);
+      await axios.delete(`${BASE_URL}/coupon/deleteCoupon/${couponID}`);
       getAllCoupons();
       handleCloseDialog();
       toast.success("Coupon Deleted Successfully");
