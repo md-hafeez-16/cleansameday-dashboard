@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Login from "./Pages/Onboarding/Login/Login";
@@ -14,20 +13,20 @@ import AddTickets from "./Pages/AllTickets/RelatedPages/AddTickets";
 import AddCoupons from "./Pages/AllCoupons/RelatedPages/AddCoupons";
 import Bookings from "./Pages/Bookings/Bookings";
 import { Toaster } from "react-hot-toast";
-
 import EditCoupons from "./Pages/AllCoupons/RelatedPages/EditCoupons";
 import EditEvents from "./Pages/AllEvents/RelatedPages/EditEvents";
 
 function App() {
   return (
     <div className="min-h-screen text-left">
-      
       <Router>
-      <Toaster
-          position="top-right"/>
+        <Toaster position="top-right" />
         <Routes>
+          {/* Public route */}
           <Route path="/" element={<Login />} />
-          {/* <Route element={<ProtectedRoute />}> */}
+          
+          {/* Protected routes */}
+          <Route element={<ProtectedRoute />}>
             <Route element={<FlowSide />}>
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="customer" element={<Customer />} />
@@ -42,7 +41,7 @@ function App() {
               <Route path="addevent" element={<AddEvents />} />
               <Route path="bookings" element={<Bookings />} />
             </Route>
-          {/* </Route> */}
+          </Route>
         </Routes>
       </Router>
     </div>
