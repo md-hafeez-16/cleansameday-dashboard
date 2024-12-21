@@ -6,16 +6,19 @@ import axios from "axios";
 import { BASE_URL } from "../../constants";
 import { useNavigate } from "react-router-dom";
 import Pagination from "../Components/Pagination";
+import { ClipLoader } from "react-spinners";
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
   const [id, setId] = useState(null);
-  const [dialogOpen, setDialogOpen] = useState(false); // Controls modal visibility
+  const [dialogOpen, setDialogOpen] = useState(false); 
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
 
   const fetchAllEvents = async () => {
+    setIsLoading(true)
     try {
       const res = await axios.get(`${BASE_URL}/event/getAllEventsPagination?page=${page}&pageSize=10`);
       const fetchedEvents = res.data.events.map((event, index) => ({
@@ -34,6 +37,8 @@ const AllEvents = () => {
       setTotalPages(res?.pagination?.totalPages);
     } catch (error) {
       console.error("Error fetching events:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -89,6 +94,14 @@ const AllEvents = () => {
     fetchAllEvents();
   }, []);
 
+  if (isLoading) {
+    return (
+      <div className=" mt-40 flex justify-center items-center">
+        <ClipLoader className="text-[#FDE7AA]" />
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="p-4">
@@ -116,19 +129,19 @@ const AllEvents = () => {
       {dialogOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-lg font-semibold mb-4">
+            <h2 className="text-sm font-semibold mb-4">
               Are you sure you want to delete this event?
             </h2>
             <div className="flex justify-end gap-4">
               <button
                 onClick={handleCloseDialog}
-                className="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
+                className="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 text-xs"
               >
                 Cancel
               </button>
               <button
                 onClick={handleDelete}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-xs"
               >
                 Delete
               </button>

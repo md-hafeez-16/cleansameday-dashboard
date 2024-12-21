@@ -82,7 +82,12 @@ const FlowSide = () => {
     {
       label: "Customer",
       icon: <FaPeopleGroup className="h-5 w-5" />,
-      path: "/customer", // Correct path for Customer
+      path: "/customer", 
+    },
+    {
+      label: "Bookings",
+      icon: <FaListAlt className="h-5 w-5" />,
+      path: "/bookings",
     },
     {
       label: "Events",
@@ -92,14 +97,14 @@ const FlowSide = () => {
         { name: "Add Events", path: "addevent" },
       ],
     },
-    {
-      label: "Tickets",
-      icon: <IoTicketSharp className="h-5 w-5" />,
-      sublinks: [
-        { name: "All Bookings", path: "bookings" },
-        { name: "Add Tickets", path: "addTickets" },
-      ],
-    },
+    // {
+    //   label: "Tickets",
+    //   icon: <IoTicketSharp className="h-5 w-5" />,
+    //   sublinks: [
+    //     { name: "All Bookings", path: "bookings" },
+    //     { name: "Add Tickets", path: "addTickets" },
+    //   ],
+    // },
     {
       label: "Coupons",
       icon: <MdDiscount className="h-5 w-5" />,

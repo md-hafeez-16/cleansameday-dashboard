@@ -34,7 +34,7 @@ const Bookings = () => {
         <img
           src={row.profilePic}
           alt={`${row.customerName}`}
-          className="h-5 w-5 rounded-full"
+          className="h-10 w-10 rounded-full"
         />
       ),
     },
