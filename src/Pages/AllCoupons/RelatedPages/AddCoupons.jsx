@@ -44,6 +44,7 @@ const AddCoupons = () => {
     try {
       const {data} = await axios.post(`${BASE_URL}/coupon/createCoupon`, backendData);
       console.log("data", data)
+      toast.success("Coupon Added Successfully");
       navigate("/coupons")
     } catch (error) {
       console.log("error", error)

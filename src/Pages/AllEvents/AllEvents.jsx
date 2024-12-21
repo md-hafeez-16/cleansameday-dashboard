@@ -7,6 +7,7 @@ import { BASE_URL } from "../../constants";
 import { useNavigate } from "react-router-dom";
 import Pagination from "../Components/Pagination";
 import { ClipLoader } from "react-spinners";
+import toast from "react-hot-toast";
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
@@ -55,7 +56,8 @@ const AllEvents = () => {
     try {
       await axios.delete(`${BASE_URL}/event/deleteEvent/${id}`);
       fetchAllEvents();
-      handleCloseDialog(); // Close modal after deletion
+      handleCloseDialog();
+      toast.success("Event Deleted Successfully");
     } catch (error) {
       console.error("Error deleting event:", error);
     }

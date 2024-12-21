@@ -7,6 +7,7 @@ import { BASE_URL } from "../../constants";
 import Pagination from "../Components/Pagination";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
+import toast from "react-hot-toast";
 
 const AllCoupons = () => {
   const [AllCoupons, setAllCoupons] = useState([]);
@@ -93,6 +94,7 @@ const AllCoupons = () => {
       // await axios.delete(`${BASE_URL}/event/deleteEvent/${id}`);
       getAllCoupons();
       handleCloseDialog();
+      toast.success("Coupon Deleted Successfully");
     } catch (error) {
       console.error("Error deleting event:", error);
     }
@@ -126,7 +128,7 @@ const AllCoupons = () => {
         />
       )}
 
-{dialogOpen && (
+      {dialogOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-sm font-semibold mb-4">
