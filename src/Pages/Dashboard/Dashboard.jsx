@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import StatCard from "./Components/StatCard";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import CircularGraph from "../Components/PieChart";
+import { BASE_URL } from "../../constants";
+import { ClipLoader } from "react-spinners";
 
 const Dashboard = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [preview, setPreview] = useState(null);
-  const [uploadStatus, setUploadStatus] = useState(""); // To track upload status
+  const [uploadStatus, setUploadStatus] = useState("");
+  const [eventCount, setEventCount] = useState(0);
+  const [couponsCount, setCouponsCount] = useState(0);
+  const [ticketsCount, setTicketsCount] = useState(0);
+  const [ticketSoldCount, setTicketSoldCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [data] = useState({
-    sold: 12,
-    unsold: 8,
-  });
+  console.log("ticketsCount", ticketsCount)
+  console.log("ticketSoldCount", ticketSoldCount)
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -55,12 +60,43 @@ const Dashboard = () => {
     }
   };
 
+  useEffect(() => {
+    const handleStats = async () => {
+      setIsLoading(true);
+      try {
+        const events = await axios.get(`${BASE_URL}/event/totalEventsCount`);
+        setEventCount(events?.data?.count);
+
+        const coupons = await axios.get(`${BASE_URL}/coupon/totalCoupons`);
+        setCouponsCount(coupons?.data?.total);
+
+        const {data} = await axios.get(`${BASE_URL}/event/totalTicketsSold`);
+        setTicketsCount(data?.totalTickets);
+        setTicketSoldCount(data?.totalTicketsSold);
+
+      } catch (error) {
+        console.log("stats Error", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    handleStats();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className=" mt-40 flex justify-center items-center">
+        <ClipLoader className="text-[#FDE7AA]" />
+      </div>
+    );
+  }
+
   return (
     <div className="p-4 flex flex-col gap-5">
       <div className="grid grid-cols-3 gap-5">
-        <StatCard sold={12} total={20} name={"Total Events"} />
-        <StatCard sold={12} total={20} name={"Total Tickets Sold"} />
-        <StatCard sold={12} total={20} name={"Total Coupons"} />
+        <StatCard sold={eventCount} name={"Total Events"} />
+        <StatCard sold={ticketSoldCount} total={ticketsCount} name={"Total Tickets Sold"} />
+        <StatCard sold={couponsCount} name={"Total Coupons"} />
       </div>
       <div className="flex flex-col md:flex-row md:flex-nowrap gap-5">
         <div className="w-full md:w-1/2">
@@ -115,15 +151,17 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-        <div className="p-5 bg-white shadow-md rounded-lg w-full md:w-1/2 flex flex-col justify-center items-center">
-        <h2 className="text-xl font-semibold mb-4 text-primary">Tickets Overview</h2>
-        <CircularGraph
-          labels={["Tickets Sold", "Tickets Unsold"]}
-          data={[data.sold, data.unsold]}
-          colors={["#012169", "#B9D9EB"]}
-          title="Tickets Distribution"
-        />
-      </div>
+        {/* <div className="p-5 bg-white shadow-md rounded-lg w-full md:w-1/2 flex flex-col justify-center items-center">
+          <h2 className="text-xl font-semibold mb-4 text-primary">
+            Tickets Overview
+          </h2>
+          <CircularGraph
+            labels={["Tickets Sold", "Tickets Unsold"]}
+            data={[data.sold, data.unsold]}
+            colors={["#012169", "#B9D9EB"]}
+            title="Tickets Distribution"
+          />
+        </div> */}
       </div>
     </div>
   );
