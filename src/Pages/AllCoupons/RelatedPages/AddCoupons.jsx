@@ -6,7 +6,6 @@ import axios from "axios";
 import { BASE_URL } from "../../../constants";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-
 const AddCoupons = () => {
   const [formData, setFormData] = useState({
     name: "",
