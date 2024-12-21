@@ -57,11 +57,15 @@ const AllEvents = () => {
   return (
     <div className="p-4">
       <h1 className="text-xl font-bold mb-4 text-primary">All Events</h1>
-      <CustTable
-        columns={columns}
-        data={events}
-        className="shadow-lg rounded-lg"
-      />
+      {events?.length > 0 ? (
+        <CustTable
+          columns={columns}
+          data={events}
+          className="shadow-lg rounded-lg"
+        />
+      ) : (
+        <h1 className="mb-4 text-primary">No Coupons</h1>
+      )}
     </div>
   );
 };
