@@ -16,6 +16,7 @@ import Bookings from "./Pages/Bookings/Bookings";
 import { Toaster } from "react-hot-toast";
 
 import EditCoupons from "./Pages/AllCoupons/RelatedPages/EditCoupons";
+import EditEvents from "./Pages/AllEvents/RelatedPages/EditEvents";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
               <Route path="coupons" element={<AllCoupons />} />
               <Route path="addCoupons" element={<AddCoupons />} />
               <Route path="editCoupons/:id" element={<EditCoupons />} />
+              <Route path="editevents/:id" element={<EditEvents />} />
               <Route path="addevent" element={<AddEvents />} />
               <Route path="bookings" element={<Bookings />} />
             </Route>
