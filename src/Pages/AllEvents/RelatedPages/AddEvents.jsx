@@ -18,8 +18,7 @@ const AddEvents = () => {
     { type: "", price: "", availableTickets: "" },
   ]);
 
-
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const handleTimeSlotChange = (index, field, value) => {
     const updatedTimeSlots = [...timeSlots];
@@ -55,12 +54,11 @@ const AddEvents = () => {
     try {
       const res = await axios.post(`${BASE_URL}/event/createEvent`, reqBody);
       console.log("Response: ", res.data);
-     toast.success("Event Added Successfully");
-     navigate(`/events`)
-     
+      toast.success("Event Added Successfully");
+      navigate(`/events`);
     } catch (error) {
       console.error("Error: ", error);
-      toast.error("Failed to Add Event")
+      toast.error("Failed to Add Event");
     }
   };
 
@@ -138,7 +136,6 @@ const AddEvents = () => {
                 Image
               </label>
               <input
-               
                 onChange={handleImageChange}
                 type="file"
                 accept="image/*"
@@ -178,9 +175,12 @@ const AddEvents = () => {
             <label className="block text-xs font-semibold text-gray-700">
               Time Slots
             </label>
-            <div className="space-y-2">
+            <div className="space-y-2 ">
               {timeSlots.map((timeSlot, index) => (
-                <div key={index} className="flex items-center space-x-4">
+                <div
+                  key={index}
+                  className="flex items-center space-x-4 flex-nowrap"
+                >
                   <select
                     value={timeSlot.type}
                     onChange={(e) =>
@@ -220,17 +220,17 @@ const AddEvents = () => {
                     onClick={() => removeTimeSlot(index)}
                     className="text-xs text-red-600 hover:underline"
                   >
-                    <Minus/> 
+                    <Minus />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={addTimeSlot}
+                    className="text-xs text-indigo-600 hover:underline"
+                  >
+                    <Plus />
                   </button>
                 </div>
               ))}
-              <button
-                type="button"
-                onClick={addTimeSlot}
-                className="text-xs text-indigo-600 hover:underline"
-              >
-                <Plus/>
-              </button>
             </div>
           </div>
 
