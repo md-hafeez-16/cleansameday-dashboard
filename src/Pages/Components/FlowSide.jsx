@@ -69,8 +69,6 @@ const FlowSide = () => {
     setDialogOpen(false); // Close the dialog after confirmation
     localStorage.clear()
     navigate("/")
-
-    
   };
 
   const sidebarItems = [
