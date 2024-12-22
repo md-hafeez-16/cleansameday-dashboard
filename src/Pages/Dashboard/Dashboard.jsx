@@ -91,7 +91,6 @@ const Dashboard = () => {
       setUploadStatus("Please select an image first.");
       return;
     }
-
     const formData = new FormData();
     formData.append("image", selectedImage); // Assuming the backend expects the field name to be "image"
 
