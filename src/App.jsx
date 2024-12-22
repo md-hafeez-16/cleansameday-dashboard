@@ -24,7 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           
-          {/* Wrap all protected routes inside the ProtectedRoute component */}
+          
           <Route element={<ProtectedRoute />}>
             <Route element={<FlowSide />}>
               <Route path="dashboard" element={<Dashboard />} />

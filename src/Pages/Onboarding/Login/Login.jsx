@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import loginbg from "../../../assets/images/loginbg.jpg";
 import { Eye, EyeClosed } from "lucide-react";
+import dummylogo from "../../../assets/Images/dummylogo.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,12 +18,28 @@ const Login = () => {
   const [userId, setUserId] = useState("");
   const [custId, setCustId] = useState("");
 
+  const [logo, setLogo] = useState("");
+
   const togglePasswordVisibility = () => setPasswordShown((cur) => !cur);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const fetchLogo = async () => {
+    try {
+      const res = await axios.get(`${BASE_URL}/logo/getLogo`);
+      console.log("logo", res.data);
+      setLogo(res.data.images[0].image);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchLogo();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -80,10 +97,13 @@ const Login = () => {
                   <h1 className="text-xl font-bold text-primary text-left">
                     Login
                   </h1>
-                  <p className="text-gray-600 text-sm">Welcome to ETB</p>
+                  {/* <p className="text-gray-600 text-sm">Welcome to ETB</p> */}
                 </div>
                 <div>
-                  <p className="font-bold text-xl text-primary ">ETB</p>
+                  {/* <p className="font-bold text-xl text-primary ">
+                   
+                  </p> */}
+                  <img src={logo || dummylogo} alt="" className="h-14 w-14 object-cover rounded-full" />
                 </div>
               </div>
             </div>
@@ -100,7 +120,7 @@ const Login = () => {
                   placeholder="Type your e-mail"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-lg"
+                  className="w-full mt-1 p-2 border border-gray-400 rounded-md "
                   aria-invalid={!!errors.email}
                 />
                 {errors.email && (
@@ -120,7 +140,7 @@ const Login = () => {
                     placeholder="Password"
                     value={formData.password}
                     onChange={handleChange}
-                    className="w-full mt-1 p-2 border border-gray-300 rounded-lg"
+                    className="w-full mt-1 p-2 border border-gray-400 rounded-md"
                     aria-invalid={!!errors.password}
                   />
                   <button
@@ -157,7 +177,6 @@ const Login = () => {
                 disabled={loading}
               >
                 {loading ? "Logging in..." : "Login"}
-                
               </button>
             </form>
 

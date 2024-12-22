@@ -28,14 +28,17 @@ import { IoTicketSharp } from "react-icons/io5";
 import { MdDiscount } from "react-icons/md";
 import { FaPowerOff } from "react-icons/fa";
 import { FaListAlt } from "react-icons/fa";
+import axios from "axios";
+import { BASE_URL } from "../../constants";
+import dummylogo from "../../assets/Images/dummylogo.png";
 
 const FlowSide = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [open, setOpen] = useState(0);
   const [dialogOpen, setDialogOpen] = useState(false); // State for dialog
   const location = useLocation();
-
-  const navigate= useNavigate()
+  const [logo, setLogo] = useState("");
+  const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem("user"));
   // console.log("user", user);
@@ -55,6 +58,20 @@ const FlowSide = () => {
     setOpen(open === value ? 0 : value);
   };
 
+  const fetchLogo = async () => {
+    try {
+      const res = await axios.get(`${BASE_URL}/logo/getLogo`);
+      console.log("logo", res.data);
+      setLogo(res.data.images[0].image);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchLogo();
+  }, []);
+
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   const handleLogoutClick = () => {
@@ -67,8 +84,8 @@ const FlowSide = () => {
 
   const handleConfirmLogout = () => {
     setDialogOpen(false); // Close the dialog after confirmation
-    localStorage.clear()
-    navigate("/")
+    localStorage.clear();
+    navigate("/");
   };
 
   const sidebarItems = [
@@ -80,7 +97,7 @@ const FlowSide = () => {
     {
       label: "Customer",
       icon: <FaPeopleGroup className="h-5 w-5" />,
-      path: "/customer", 
+      path: "/customer",
     },
     {
       label: "Bookings",
@@ -221,15 +238,20 @@ const FlowSide = () => {
       >
         <div className="mx-auto flex items-center justify-between text-primary">
           <div className="flex items-center justify-center gap-1 cursor-pointer">
-            {/* <img src={AgmrLogo} alt="" className="h-6 w-6 object-contain" /> */}
-            <Typography
-              as="a"
-              href="#"
-              className="mr-4 cursor-pointer text-lg font-bold text-blue-gray-50 mt-1"
-            >
-              ETB
-            </Typography>
+            <img
+              src={logo || dummylogo}
+              alt="ETB"
+              className="h-14 w-14 object-cover rounded-full"
+            />
+            {/* <Typography
+    as="a"
+    href="#"
+    className="mr-4 cursor-pointer text-lg font-bold text-blue-gray-50 mt-1"
+  >
+    ETB
+  </Typography> */}
           </div>
+
           <div className="hidden lg:block">
             <div className="flex items-center gap-4">
               <div className="h-11 w-11 rounded-full bg-blue-gray-50 text-blue-gray-900 flex items-center justify-center text-2xl font-bold">
