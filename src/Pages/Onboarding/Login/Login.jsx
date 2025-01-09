@@ -3,9 +3,10 @@ import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
-import loginbg from "../../../assets/images/loginbg.jpg";
+import samedaybg from "../../../assets/images/samedaybg.jpg";
 import { Eye, EyeClosed } from "lucide-react";
 import dummylogo from "../../../assets/Images/dummylogo.png";
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -55,14 +56,14 @@ const Login = () => {
       const res = await axios.post(`${BASE_URL}/user/login`, reqbody);
       console.log(res.data);
 
-      if (res.data.user.role === "ADMIN") {
+      if (res.data.userDoc.role === "ADMIN") {
         toast.success(`${res?.data?.msg}`);
 
-        const userId = res.data.user.id;
+        const userId = res.data.userDoc._id;
 
         localStorage.setItem("userId", userId);
 
-        localStorage.setItem("user", JSON.stringify(res.data.user));
+        localStorage.setItem("user", JSON.stringify(res.data.userDoc));
 
         // login(res.data);
         // await handleLoginSyncCart();
@@ -84,7 +85,7 @@ const Login = () => {
       <div
         className="fixed inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url(${loginbg})`,
+          backgroundImage: `url(${samedaybg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

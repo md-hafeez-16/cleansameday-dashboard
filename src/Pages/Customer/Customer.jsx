@@ -10,16 +10,8 @@ const columns = [
   { label: "Customer Name", accessor: "customerName" },
   { label: "Email", accessor: "email" },
   { label: "Phone", accessor: "phone" },
-  // {
-  //   label: "Actions",
-  //   accessor: "actions",
-  //   render: (value, row) => (
-  //     <div className="flex gap-2 justify-center items-center cursor-pointer">
-  //       <FaRegEdit className="text-blue-500 hover:underline" size={16} />
-  //       <MdDelete className="text-red-500 hover:underline" size={16} />
-  //     </div>
-  //   ),
-  // },
+  { label: "Address", accessor: "address" },
+  
 ];
 
 const Customer = () => {
@@ -31,10 +23,10 @@ const Customer = () => {
     const getAllCustomer = async () => {
       try {
         const { data } = await axios.get(
-          `${BASE_URL}/customer/getAllCustomerPagination?page=1&pageSize=10`
+          `${BASE_URL}/user/getAllUsers?page=1&pageSize=10`
         );
-        console.log("data", data?.customers);
-        setAllCustomer(data?.customers);
+        console.log("data", data?.userDoc);
+        setAllCustomer(data?.userDoc);
       } catch (error) {
         console.log("get all customer error", error);
       } finally {
@@ -46,8 +38,9 @@ const Customer = () => {
 
   const data = allCustomer.map((customer) => ({
     customerName: `${customer?.firstName} ${customer?.lastName}`,
-    phone: customer?.user?.phone,
-    email: customer?.user?.email,
+    phone: customer?.phone,
+    email: customer?.email,
+    address: customer?.address,
     // actions: null,
   }));
 
