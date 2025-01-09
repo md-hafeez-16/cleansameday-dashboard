@@ -15,6 +15,9 @@ import { Toaster } from "react-hot-toast";
 
 import EditCoupons from "./Pages/AllCoupons/RelatedPages/EditCoupons";
 import EditEvents from "./Pages/AllEvents/RelatedPages/EditEvents";
+import AllService from "./Pages/Service/AllService";
+import AddService from "./Pages/Service/AddService";
+import EditService from "./Pages/Service/EditService";
 
 function App() {
   return (
@@ -29,13 +32,9 @@ function App() {
             <Route element={<FlowSide />}>
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="customer" element={<Customer />} />
-              <Route path="events" element={<AllEvents />} />
-              <Route path="addEvents" element={<AddEvents />} />
-              <Route path="coupons" element={<AllCoupons />} />
-              <Route path="addCoupons" element={<AddCoupons />} />
-              <Route path="editCoupons/:id" element={<EditCoupons />} />
-              <Route path="editevents/:id" element={<EditEvents />} />
-              <Route path="addevent" element={<AddEvents />} />
+              <Route path="service" element={<AllService/>}/>
+              <Route path="addservice" element={<AddService/>}/>
+              <Route path="editservice/:id" element={<EditService/>}/>
               <Route path="bookings" element={<Bookings />} />
             </Route>
           </Route>

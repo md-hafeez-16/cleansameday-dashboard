@@ -58,19 +58,8 @@ const FlowSide = () => {
     setOpen(open === value ? 0 : value);
   };
 
-  const fetchLogo = async () => {
-    try {
-      const res = await axios.get(`${BASE_URL}/logo/getLogo`);
-      console.log("logo", res.data);
-      setLogo(res.data.images[0].image);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
-  useEffect(() => {
-    fetchLogo();
-  }, []);
+
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
@@ -90,7 +79,7 @@ const FlowSide = () => {
 
   const sidebarItems = [
     {
-      label: "Home",
+      label: "DashBoard",
       icon: <RiDashboardFill className="h-5 w-5" />,
       path: "/dashboard", // Correct path for Home
     },
@@ -105,11 +94,11 @@ const FlowSide = () => {
       path: "/bookings",
     },
     {
-      label: "Events",
+      label: "Service",
       icon: <BsCalendarEventFill className="h-5 w-5" />,
       sublinks: [
-        { name: "All Events", path: "events" },
-        { name: "Add Events", path: "addevent" },
+        { name: "All Service", path: "service" },
+        { name: "Add Service", path: "addservice" },
       ],
     },
     // {
@@ -120,14 +109,7 @@ const FlowSide = () => {
     //     { name: "Add Tickets", path: "addTickets" },
     //   ],
     // },
-    {
-      label: "Coupons",
-      icon: <MdDiscount className="h-5 w-5" />,
-      sublinks: [
-        { name: "All Coupons", path: "coupons" },
-        { name: "Add Coupons", path: "addCoupons" },
-      ],
-    },
+    
     {
       label: "Log Out",
       icon: <FaPowerOff className="h-5 w-5" />,
@@ -239,7 +221,7 @@ const FlowSide = () => {
         <div className="mx-auto flex items-center justify-between text-primary">
           <div className="flex items-center justify-center gap-1 cursor-pointer">
             <img
-              src={logo || dummylogo}
+              src={dummylogo}
               alt="ETB"
               className="h-14 w-14 object-cover rounded-full"
             />
