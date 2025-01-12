@@ -15,7 +15,7 @@ const CustTable = ({ columns, data, className, pagination }) => {
   const endItem = Math.min(currentPage * pageSize, totalItems);
 
   return (
-    <div className={`w-full ${className}`}>
+    <div className={`w-full ${className} py-5`}>
       <div className="overflow-x-auto custom-scrollbar ">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
@@ -53,7 +53,7 @@ const CustTable = ({ columns, data, className, pagination }) => {
       </div>
 
       {/* Enhanced Pagination Controls */}
-      <div className="flex justify-between items-center mt-4 px-4">
+      <div className="flex md:flex-row flex-col gap-5 justify-between items-center mt-4 px-4">
         <div className="flex items-center gap-2">
           <button
             disabled={currentPage === 1}

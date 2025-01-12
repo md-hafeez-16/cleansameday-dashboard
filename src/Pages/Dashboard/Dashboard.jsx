@@ -68,7 +68,7 @@ const Dashboard = () => {
 
   return (
     <div className="p-4 flex flex-col gap-5">
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid md:grid-cols-4 grid-cols-1 mt-10 gap-5">
         <StatCard sold={eventCount} name={"Total Revinue"} />
         <StatCard sold={couponsCount} name={"Total Bookings"} />
         <StatCard sold={couponsCount} name={"completed Bookings"} />

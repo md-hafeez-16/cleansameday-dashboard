@@ -15,7 +15,7 @@ const AllService = () => {
   const pageSize = 10;
   const [totalItems, setTotalItems] = useState(0);
   const [error, setError] = useState(null);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const fetchBookings = async (page) => {
     setIsLoading(true);
@@ -49,10 +49,8 @@ const AllService = () => {
   };
 
   const handleEdit = (serviceId) => {
-
     console.log("Editing Service with ID:", serviceId);
     navigate(`/editservice/${serviceId}`);
-
   };
 
   const handleDelete = async (serviceId) => {
@@ -82,7 +80,6 @@ const AllService = () => {
               src={value}
               alt="Service"
               className="h-10 w-10 rounded-full object-cover"
-              
             />
           ) : (
             <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
@@ -198,7 +195,6 @@ const AllService = () => {
       ) : (
         <div className="text-center py-10 bg-white rounded-lg shadow">
           <h2 className="text-lg text-gray-600">No Bookings Yet</h2>
-         
         </div>
       )}
     </div>

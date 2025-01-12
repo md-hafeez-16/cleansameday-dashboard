@@ -23,6 +23,7 @@ import EditEvents from "./Pages/AllEvents/RelatedPages/EditEvents";
 import AllService from "./Pages/Service/AllService";
 import AddService from "./Pages/Service/AddService";
 import EditService from "./Pages/Service/EditService";
+import ForgotPassword from "./Pages/Onboarding/forgot-password/ForgotPassword";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Toaster position="top-right" />
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
 
           <Route element={<ProtectedRoute />}>
             <Route element={<FlowSide />}>

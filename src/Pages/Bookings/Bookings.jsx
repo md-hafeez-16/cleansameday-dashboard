@@ -34,7 +34,6 @@ const Bookings = () => {
       document.body.appendChild(link);
       link.click();
 
-  
       link.remove();
       window.URL.revokeObjectURL(url);
 
@@ -74,11 +73,16 @@ const Bookings = () => {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-   
+
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const columns = [
+    {
+      label: "Booking ID",
+      accessor: "bookingId",
+      render: (value) => <span className="font-medium">{value}</span>,
+    },
     {
       label: "Service Name",
       accessor: "serviceName",
@@ -94,7 +98,6 @@ const Bookings = () => {
               src={row.service.imgUrl}
               alt={`${row.service?.name || "Service"}`}
               className="h-10 w-10 rounded-full object-cover"
-              
             />
           ) : (
             <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
@@ -133,6 +136,7 @@ const Bookings = () => {
   ];
 
   const data = allBooking?.map((booking) => ({
+    bookingId: booking?._id,
     serviceName: booking?.service?.name,
     service: booking?.service, // Keep the full service object for the profile picture render
     profilePic: booking?.service?.imgUrl,
@@ -164,8 +168,8 @@ const Bookings = () => {
   }
 
   return (
-    <div className="p-4">
-      <div className="flex justify-between items-center mb-6">
+    <div className="p-4 py-12">
+      <div className="flex justify-between md:flex-row flex-col gap-5 md:gap-0  items-center mb-6">
         <h1 className="text-xl font-bold text-primary">All Bookings</h1>
         <div className="text-sm text-gray-500">
           Total Bookings: {totalItems}
@@ -185,7 +189,7 @@ const Bookings = () => {
           <ClipLoader className="text-primary" />
         </div>
       ) : allBooking?.length > 0 ? (
-        <div className="bg-white rounded-lg shadow-lg">
+        <div className="bg-white rounded-lg shadow-lg  border">
           <CustTable
             columns={columns}
             data={data}

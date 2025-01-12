@@ -30,7 +30,7 @@ import { FaPowerOff } from "react-icons/fa";
 import { FaListAlt } from "react-icons/fa";
 import axios from "axios";
 import { BASE_URL } from "../../constants";
-import dummylogo from "../../assets/Images/dummylogo.png";
+import dummylogo from "../../assets/Images/logo.avif";
 
 const FlowSide = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -206,15 +206,16 @@ const FlowSide = () => {
       <Navbar
         color="transparent"
         fullWidth
-        className="border-b shadow-none max-w-screen rounded-none fixed left-0 top-0 z-50 bg-primary px-10"
+        className="border-b shadow-none max-w-screen rounded-none fixed left-0 top-0 z-50 bg-primary md:px-10"
       >
         <div className="mx-auto flex items-center justify-between text-primary">
           <div className="flex items-center justify-center gap-1 cursor-pointer">
             <img
               src={dummylogo}
               alt="ETB"
-              className="h-14 w-14 object-cover rounded-full"
+              className="h-14 w-14  rounded-full"
             />
+            <h1 className="text-white">Clean Same Day</h1>
             {/* <Typography
     as="a"
     href="#"

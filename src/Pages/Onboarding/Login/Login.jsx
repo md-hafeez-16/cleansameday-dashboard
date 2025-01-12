@@ -7,7 +7,6 @@ import samedaybg from "../../../assets/images/samedaybg.jpg";
 import { Eye, EyeClosed } from "lucide-react";
 import dummylogo from "../../../assets/Images/dummylogo.png";
 
-
 const Login = () => {
   const navigate = useNavigate();
   const [passwordShown, setPasswordShown] = useState(false);
@@ -28,19 +27,7 @@ const Login = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const fetchLogo = async () => {
-    try {
-      const res = await axios.get(`${BASE_URL}/logo/getLogo`);
-      console.log("logo", res.data);
-      setLogo(res.data.images[0].image);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchLogo();
-  }, []);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -104,7 +91,7 @@ const Login = () => {
                   {/* <p className="font-bold text-xl text-primary ">
                    
                   </p> */}
-                  <img src={logo || dummylogo} alt="" className="h-14 w-14 object-cover rounded-full" />
+                  {/* <img src={logo || dummylogo} alt="" className="h-14 w-14 object-cover rounded-full" /> */}
                 </div>
               </div>
             </div>
@@ -162,14 +149,16 @@ const Login = () => {
               </div>
 
               {/* Forgot Password */}
-              {/* <div className="text-right">
-                <p
+              {/* Forgot Password */}
+              <div className="text-right">
+                <button
                   onClick={() => navigate("/forgot-password")}
-                  className="text-sm text-primary hover:underline cursor-pointer"
+                  className="text-sm text-primary hover:underline cursor-pointer bg-transparent border-none p-0"
+                  type="button"
                 >
                   Forgot password?
-                </p>
-              </div> */}
+                </button>
+              </div>
 
               {/* Submit Button */}
               <button
