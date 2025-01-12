@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import "./App.css";
 import Login from "./Pages/Onboarding/Login/Login";
 import ProtectedRoute from "./Utils/ProtectedRoutes";
@@ -26,15 +31,14 @@ function App() {
         <Toaster position="top-right" />
         <Routes>
           <Route path="/" element={<Login />} />
-          
-          
+
           <Route element={<ProtectedRoute />}>
             <Route element={<FlowSide />}>
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="customer" element={<Customer />} />
-              <Route path="service" element={<AllService/>}/>
-              <Route path="addservice" element={<AddService/>}/>
-              <Route path="editservice/:id" element={<EditService/>}/>
+              <Route path="service" element={<AllService />} />
+              <Route path="addservice" element={<AddService />} />
+              <Route path="editservice/:id" element={<EditService />} />
               <Route path="bookings" element={<Bookings />} />
             </Route>
           </Route>

@@ -58,9 +58,6 @@ const FlowSide = () => {
     setOpen(open === value ? 0 : value);
   };
 
-
-
-
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   const handleLogoutClick = () => {
@@ -83,16 +80,7 @@ const FlowSide = () => {
       icon: <RiDashboardFill className="h-5 w-5" />,
       path: "/dashboard", // Correct path for Home
     },
-    {
-      label: "Customer",
-      icon: <FaPeopleGroup className="h-5 w-5" />,
-      path: "/customer",
-    },
-    {
-      label: "Bookings",
-      icon: <FaListAlt className="h-5 w-5" />,
-      path: "/bookings",
-    },
+
     {
       label: "Service",
       icon: <BsCalendarEventFill className="h-5 w-5" />,
@@ -101,15 +89,17 @@ const FlowSide = () => {
         { name: "Add Service", path: "addservice" },
       ],
     },
-    // {
-    //   label: "Tickets",
-    //   icon: <IoTicketSharp className="h-5 w-5" />,
-    //   sublinks: [
-    //     { name: "All Bookings", path: "bookings" },
-    //     { name: "Add Tickets", path: "addTickets" },
-    //   ],
-    // },
-    
+    {
+      label: "Bookings",
+      icon: <FaListAlt className="h-5 w-5" />,
+      path: "/bookings",
+    },
+    {
+      label: "Customer",
+      icon: <FaPeopleGroup className="h-5 w-5" />,
+      path: "/customer",
+    },
+
     {
       label: "Log Out",
       icon: <FaPowerOff className="h-5 w-5" />,
