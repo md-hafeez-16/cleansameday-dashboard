@@ -164,12 +164,12 @@ const EditService = () => {
           />
         </div>
 
-        {formData.image && (
+        {formData.imgUrl && (
           <div className="mb-6">
             <img
               alt="Service"
-              src={formData.image}
-              className="w-full h-auto rounded-md shadow-md"
+              src={formData.imgUrl}
+              className="w-full h-52 rounded-md shadow-md"
             />
           </div>
         )}

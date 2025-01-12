@@ -80,6 +80,11 @@ const Bookings = () => {
 
   const columns = [
     {
+      label: "Booking ID",
+      accessor: "bookingId",
+      render: (value) => <span className="font-medium">{value}</span>,
+    },
+    {
       label: "Service Name",
       accessor: "serviceName",
       render: (value) => <span className="font-medium">{value || "N/A"}</span>,
@@ -133,6 +138,7 @@ const Bookings = () => {
   ];
 
   const data = allBooking?.map((booking) => ({
+    bookingId: booking?._id,
     serviceName: booking?.service?.name,
     service: booking?.service, // Keep the full service object for the profile picture render
     profilePic: booking?.service?.imgUrl,
