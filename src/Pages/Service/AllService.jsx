@@ -7,6 +7,7 @@ import axios from "axios";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { PencilOff, Trash2 } from "lucide-react";
+import { LiaEdit } from "react-icons/lia";
 
 const AllService = () => {
   const [allBooking, setAllBookings] = useState([]);
@@ -130,13 +131,14 @@ const AllService = () => {
             onClick={() => handleEdit(row.ServiceId)}
             className="text-blue-500 hover:text-blue-700"
           >
-            <PencilOff />
+            {/* <PencilOff /> */}
+            <LiaEdit className="w-5 h-10" />
           </button>
           <button
             onClick={() => handleDelete(row.ServiceId)}
             className="text-red-500 hover:text-red-700"
           >
-            <Trash2 />
+            <Trash2 className="w-5 h-10" />
           </button>
         </div>
       ),
