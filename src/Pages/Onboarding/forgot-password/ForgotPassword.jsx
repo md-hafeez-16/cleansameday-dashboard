@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import samedaybg from "../../../assets/images/samedaybg.jpg";
-import axios from 'axios';
-import { BASE_URL } from '../../../constants';
-import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
-import { BsEye, BsEyeSlash } from 'react-icons/bs';
+import React, { useEffect, useState } from "react";
+import samedaybg from "../../../assets/Images/samedaybg.jpg";
+import axios from "axios";
+import { BASE_URL } from "../../../constants";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 const ForgotPassword = () => {
-
-
   const [step, setStep] = useState(1);
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [otp, setOtp] = useState("");
@@ -120,148 +118,148 @@ const ForgotPassword = () => {
   };
   return (
     <div className="min-h-screen min-w-full">
-  <div
-    className="fixed inset-0 bg-cover bg-center"
-    style={{
-      backgroundImage: `url(${samedaybg})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-    }}
-  >
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="bg-white  p-8 rounded-lg shadow-md w-96 mx-auto">
-        {step === 1 && (
-          <>
-            <h2 className="text-xl text-primary font-semibold mb-4 text-center">
-              Forgot Password
-            </h2>
-            <p className="mb-4 text-center">Enter your email:</p>
-            <input
-              type="text"
-              name="emailOrPhone"
-              placeholder="Enter email"
-              value={emailOrPhone}
-              onChange={(e) => setEmailOrPhone(e.target.value)}
-              className="w-full rounded-lg p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-            <button
-              className="bg-primary text-white py-2 px-4 rounded-lg mt-4 w-full"
-              onClick={handleRequestOtp}
-            >
-              Next
-            </button>
-          </>
-        )}
-        {step === 2 && (
-          <>
-            <h2 className="text-xl font-semibold mb-4 text-primary text-center">
-              Forgot Password
-            </h2>
-            <p className="mb-4 text-center">Enter OTP that we have sent to your mail ID:</p>
-            <div className="flex justify-center gap-4">
-              {[...Array(4)].map((_, index) => (
+      <div
+        className="fixed inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${samedaybg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="bg-white  p-8 rounded-lg shadow-md w-96 mx-auto">
+            {step === 1 && (
+              <>
+                <h2 className="text-xl text-primary font-semibold mb-4 text-center">
+                  Forgot Password
+                </h2>
+                <p className="mb-4 text-center">Enter your email:</p>
                 <input
-                  key={index}
                   type="text"
-                  maxLength="1"
-                  className={`w-14 h-12 text-center border rounded-md focus:outline-none focus:ring-2 ${
-                    otp[index] && otpIsValid
-                      ? "border-green-500"
-                      : "focus:ring-primary"
-                  }`}
-                  value={otp[index] || ""}
-                  onChange={(e) => handleOtpChange(e, index)}
-                  onKeyDown={(e) => handleKeyPress(e, index)}
+                  name="emailOrPhone"
+                  placeholder="Enter email"
+                  value={emailOrPhone}
+                  onChange={(e) => setEmailOrPhone(e.target.value)}
+                  className="w-full rounded-lg p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
                 />
-              ))}
-            </div>
-            <div className="flex justify-between items-center mt-4">
-              <p className="text-sm text-gray-500">Didn't receive OTP?</p>
-              <span
-                className={`text-sm font-semibold cursor-pointer ${
-                  timer > 0
-                    ? "text-primary cursor-not-allowed"
-                    : "text-primary"
-                }`}
-                onClick={timer > 0 ? null : handleResendOtp}
-              >
-                {timer > 0 ? `Time left: ${timer}s` : "Resend OTP"}
-              </span>
-            </div>
-            <button
-              className="bg-primary rounded-lg text-white py-2 px-4 mt-6 w-full"
-              onClick={handleVerifyOtp}
-            >
-              Next
-            </button>
-          </>
-        )}
-        {step === 3 && (
-          <>
-            <h2 className="text-xl text-center text-primary font-semibold mb-4">
-              Reset Password
-            </h2>
-            <div className="relative mb-4">
-              <label className="block text-sm font-medium mb-1">
-                New Password
-              </label>
-              <input
-                type={showPassword ? "text" : "password"}
-                name="newPassword"
-                placeholder="New Password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full rounded-lg p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              <span
-                className="absolute right-3 top-8 cursor-pointer mt-2"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? (
-                  <BsEyeSlash className="h-5 w-5" />
-                ) : (
-                  <BsEye className="h-5 w-5" />
-                )}
-              </span>
-            </div>
-            <div className="relative mb-4">
-              <label className="block text-sm font-medium mb-1">
-                Confirm Password
-              </label>
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                name="confirmPassword"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full rounded-lg p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              <span
-                className="absolute right-3 top-8 cursor-pointer mt-2"
-                onClick={() =>
-                  setShowConfirmPassword(!showConfirmPassword)
-                }
-              >
-                {showConfirmPassword ? (
-                  <BsEyeSlash className="h-5 w-5" />
-                ) : (
-                  <BsEye className="h-5 w-5" />
-                )}
-              </span>
-            </div>
-            <button
-              className="bg-primary text-white py-2 px-4 rounded-lg mt-4 w-full"
-              onClick={handleResetPassword}
-            >
-              Confirm
-            </button>
-          </>
-        )}
+                <button
+                  className="bg-primary text-white py-2 px-4 rounded-lg mt-4 w-full"
+                  onClick={handleRequestOtp}
+                >
+                  Next
+                </button>
+              </>
+            )}
+            {step === 2 && (
+              <>
+                <h2 className="text-xl font-semibold mb-4 text-primary text-center">
+                  Forgot Password
+                </h2>
+                <p className="mb-4 text-center">
+                  Enter OTP that we have sent to your mail ID:
+                </p>
+                <div className="flex justify-center gap-4">
+                  {[...Array(4)].map((_, index) => (
+                    <input
+                      key={index}
+                      type="text"
+                      maxLength="1"
+                      className={`w-14 h-12 text-center border rounded-md focus:outline-none focus:ring-2 ${
+                        otp[index] && otpIsValid
+                          ? "border-green-500"
+                          : "focus:ring-primary"
+                      }`}
+                      value={otp[index] || ""}
+                      onChange={(e) => handleOtpChange(e, index)}
+                      onKeyDown={(e) => handleKeyPress(e, index)}
+                    />
+                  ))}
+                </div>
+                <div className="flex justify-between items-center mt-4">
+                  <p className="text-sm text-gray-500">Didn't receive OTP?</p>
+                  <span
+                    className={`text-sm font-semibold cursor-pointer ${
+                      timer > 0
+                        ? "text-primary cursor-not-allowed"
+                        : "text-primary"
+                    }`}
+                    onClick={timer > 0 ? null : handleResendOtp}
+                  >
+                    {timer > 0 ? `Time left: ${timer}s` : "Resend OTP"}
+                  </span>
+                </div>
+                <button
+                  className="bg-primary rounded-lg text-white py-2 px-4 mt-6 w-full"
+                  onClick={handleVerifyOtp}
+                >
+                  Next
+                </button>
+              </>
+            )}
+            {step === 3 && (
+              <>
+                <h2 className="text-xl text-center text-primary font-semibold mb-4">
+                  Reset Password
+                </h2>
+                <div className="relative mb-4">
+                  <label className="block text-sm font-medium mb-1">
+                    New Password
+                  </label>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="newPassword"
+                    placeholder="New Password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    className="w-full rounded-lg p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                  <span
+                    className="absolute right-3 top-8 cursor-pointer mt-2"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <BsEyeSlash className="h-5 w-5" />
+                    ) : (
+                      <BsEye className="h-5 w-5" />
+                    )}
+                  </span>
+                </div>
+                <div className="relative mb-4">
+                  <label className="block text-sm font-medium mb-1">
+                    Confirm Password
+                  </label>
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    name="confirmPassword"
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="w-full rounded-lg p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                  <span
+                    className="absolute right-3 top-8 cursor-pointer mt-2"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {showConfirmPassword ? (
+                      <BsEyeSlash className="h-5 w-5" />
+                    ) : (
+                      <BsEye className="h-5 w-5" />
+                    )}
+                  </span>
+                </div>
+                <button
+                  className="bg-primary text-white py-2 px-4 rounded-lg mt-4 w-full"
+                  onClick={handleResetPassword}
+                >
+                  Confirm
+                </button>
+              </>
+            )}
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-  )
-}
+  );
+};
 
-export default ForgotPassword
+export default ForgotPassword;
