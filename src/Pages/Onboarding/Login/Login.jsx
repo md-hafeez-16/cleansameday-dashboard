@@ -3,9 +3,9 @@ import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
-import samedaybg from "../../../assets/images/samedaybg.jpg";
+import samedaybg from "../../../assets/Images/samedaybg.jpg";
 import { Eye, EyeClosed } from "lucide-react";
-import dummylogo from "../../../assets/Images/dummylogo.png";
+// import dummylogo from "../../../assets/Images/dummylogo.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,8 +26,6 @@ const Login = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
