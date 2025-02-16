@@ -316,7 +316,8 @@ import { FaPowerOff } from "react-icons/fa";
 import { FaListAlt } from "react-icons/fa";
 import axios from "axios";
 import { BASE_URL } from "../../constants";
-import dummylogo from "../../assets/Images/logo.avif";
+import dummylogo from "../../assets/Images/logo.jpg";
+// import logo from "../../assets/Images/logo.jpg";
 
 const FlowSide = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -381,7 +382,7 @@ const FlowSide = () => {
       path: "/bookings",
     },
     {
-      label: "Customer",
+      label: "Users",
       icon: <FaPeopleGroup className="h-5 w-5" />,
       path: "/customer",
     },
@@ -496,12 +497,8 @@ const FlowSide = () => {
       >
         <div className="mx-auto flex items-center justify-between text-primary">
           <div className="flex items-center justify-center gap-1 cursor-pointer">
-            <img
-              src={dummylogo}
-              alt="ETB"
-              className="h-14 w-14  rounded-full"
-            />
-            <h1 className="text-white">Clean Same Day</h1>
+            <img src={dummylogo} alt="ETB" className=" w-20  rounded-md" />
+            {/* <h1 className="text-white">Clean Same Day</h1> */}
             {/* <Typography
     as="a"
     href="#"

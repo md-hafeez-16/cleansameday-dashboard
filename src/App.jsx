@@ -81,7 +81,8 @@ import AddService from "./Pages/Service/AddService";
 import EditService from "./Pages/Service/EditService";
 import ForgotPassword from "./Pages/Onboarding/forgot-password/ForgotPassword";
 import AddBooking from "./Pages/Booking/AddBooking";
-import Bookingdetails from "./Pages/Bookings/Bookingdetails";
+import BookingDetails from "./Pages/Bookings/BookingDetails";
+// import Bookingdetails from "./Pages/Bookings/Bookingdetails";
 
 function App() {
   return (
@@ -101,7 +102,7 @@ function App() {
               <Route path="addservice" element={<AddService />} />
               <Route path="editservice/:id" element={<EditService />} />
               <Route path="bookings" element={<Bookings />} />
-              <Route path="bookingdetails/:id" element={<Bookingdetails />} />
+              <Route path="bookingdetails/:id" element={<BookingDetails />} />
             </Route>
           </Route>
 

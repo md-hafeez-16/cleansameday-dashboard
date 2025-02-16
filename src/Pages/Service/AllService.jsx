@@ -96,7 +96,7 @@ const AllService = () => {
       render: (value) => <span className="font-medium">{value || "N/A"}</span>,
     },
     {
-      label: "Price",
+      label: "Estimated Price",
       accessor: "Price",
       render: (value) => (
         <span className="text-gray-600">{value || "No address provided"}</span>

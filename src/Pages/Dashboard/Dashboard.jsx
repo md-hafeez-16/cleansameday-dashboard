@@ -153,7 +153,7 @@ const Dashboard = () => {
       <div className="grid md:grid-cols-4 grid-cols-1 mt-10 gap-5">
         <StatCard sold={eventCount} name={"Total Revinue"} />
         <StatCard sold={couponsCount} name={"Total Bookings"} />
-        <StatCard sold={couponsCount} name={"completed Bookings"} />
+        <StatCard sold={couponsCount} name={"Completed Bookings"} />
         <StatCard sold={couponsCount} name={"Pending Bookings"} />
       </div>
     </div>

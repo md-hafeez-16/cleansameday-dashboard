@@ -344,30 +344,6 @@ const Bookings = () => {
       render: (value) => <span className="font-medium">{value}</span>,
     },
     {
-      label: "Service Name",
-      accessor: "serviceName",
-      render: (value) => <span className="font-medium">{value || "N/A"}</span>,
-    },
-    {
-      label: "Profile Picture",
-      accessor: "profilePic",
-      render: (value, row) => (
-        <div className="flex justify-center">
-          {row.service?.imgUrl ? (
-            <img
-              src={row.service.imgUrl}
-              alt={`${row.service?.name || "Service"}`}
-              className="h-10 w-10 rounded-full object-cover"
-            />
-          ) : (
-            <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
-              <span className="text-gray-500 text-xs">No Image</span>
-            </div>
-          )}
-        </div>
-      ),
-    },
-    {
       label: "Customer Name",
       accessor: "customerName",
       render: (value) => <span className="font-medium">{value || "N/A"}</span>,
@@ -378,6 +354,11 @@ const Bookings = () => {
       render: (value) => (
         <span className="text-gray-600">{value || "No address provided"}</span>
       ),
+    },
+    {
+      label: "Service Name",
+      accessor: "serviceName",
+      render: (value) => <span className="font-medium">{value || "N/A"}</span>,
     },
     {
       label: "Booking Date",
@@ -393,6 +374,26 @@ const Bookings = () => {
         <span className="text-gray-600">{value || "N/A"}</span>
       ),
     },
+    // {
+    //   label: "Profile Picture",
+    //   accessor: "profilePic",
+    //   render: (value, row) => (
+    //     <div className="flex justify-center">
+    //       {row.service?.imgUrl ? (
+    //         <img
+    //           src={row.service.imgUrl}
+    //           alt={`${row.service?.name || "Service"}`}
+    //           className="h-10 w-10 rounded-full object-cover"
+    //         />
+    //       ) : (
+    //         <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
+    //           <span className="text-gray-500 text-xs">No Image</span>
+    //         </div>
+    //       )}
+    //     </div>
+    //   ),
+    // },
+
     {
       label: "Bookingdetail",
       accessor: "Bookingdetail",
@@ -413,7 +414,7 @@ const Bookings = () => {
           onClick={() => downloadInvoice(value)}
           className="bg-primary text-white px-3 py-1 rounded"
         >
-          View
+          Download
         </button>
       ),
     },
@@ -457,7 +458,7 @@ const Bookings = () => {
     <div className="p-4 py-12">
       <div className="flex justify-between md:flex-row flex-col gap-5 md:gap-0  items-center mb-6">
         <h1 className="text-xl font-bold text-primary">All Bookings</h1>
-        <div className="text-sm text-gray-500">
+        <div className="text-xl font-bold text-primary">
           Total Bookings: {totalItems}
         </div>
         <div>
