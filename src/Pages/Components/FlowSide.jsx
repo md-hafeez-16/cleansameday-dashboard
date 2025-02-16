@@ -95,7 +95,7 @@ const FlowSide = () => {
       path: "/bookings",
     },
     {
-      label: "Customer",
+      label: "Users",
       icon: <FaPeopleGroup className="h-5 w-5" />,
       path: "/customer",
     },
