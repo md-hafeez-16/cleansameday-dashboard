@@ -103,6 +103,7 @@ const Bookings = () => {
       link.href = url;
       link.setAttribute("download", `invoice_${value?.service?.name}.pdf`);
       document.body.appendChild(link);
+      setOpenModel(false);
       link.click();
 
       // Clean up
@@ -260,10 +261,9 @@ const Bookings = () => {
     <div className="p-4 py-12">
       <div className="flex justify-between md:flex-row flex-col gap-5 md:gap-0  items-center mb-6">
         <h1 className="text-xl font-bold text-primary">All Bookings</h1>
-        <div className="text-xl font-bold text-primary">
+        <div className="text-sm  md:text-xl font-bold text-primary">
           Total Bookings: {totalItems}
         </div>
-
         <div>
           <button
             className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark"
@@ -316,8 +316,8 @@ const Bookings = () => {
         >
           <div className="relative p-4 w-full max-w-2xl max-h-full">
             <div className="relative bg-white rounded-lg shadow-sm">
-              <div className="flex items-center justify-between p-4 md:p-5 border-b-2 rounded-t">
-                <h3 className="text-xl font-semibold text-primary">
+              <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                <h3 className="text-xl font-semibold text-gray-900">
                   Invoice Details
                 </h3>
                 <button
@@ -345,10 +345,8 @@ const Bookings = () => {
               </div>
 
               <div className="p-4 md:p-5 space-y-4">
-                <div className="flex flex-col gap-5 justify-center items-center border-2 p-3 border-dashed">
-                  <label className="text-center text-primary text-lg">
-                    Amount
-                  </label>
+                <div className="flex flex-col gap-5 justify-center items-center">
+                  <label className="text-center text-lg">Amount</label>
                   <input
                     type="text"
                     onChange={(e) => {
@@ -357,7 +355,7 @@ const Bookings = () => {
                     className="w-64 mt-1 p-2 border border-gray-400 rounded-md "
                     placeholder="amount"
                   />
-                  <label htmlFor="" className="text-center text-primary">
+                  <label htmlFor="" className="text-center">
                     Due Date
                   </label>
                   <input

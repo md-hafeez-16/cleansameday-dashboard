@@ -20,7 +20,7 @@ const Customer = () => {
       const { data } = await axios.get(
         `${BASE_URL}/user/getAllUsers?page=${page}&pageSize=${pageSize}`
       );
-      
+
       if (data?.userDoc) {
         setAllCustomer(data.userDoc);
         setTotalItems(data.pagination?.totalDocuments || 0);
@@ -42,51 +42,47 @@ const Customer = () => {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const columns = [
-    { 
-      label: "Customer Name", 
+    {
+      label: "Users Name",
       accessor: "customerName",
-      render: (value) => (
-        <span className="font-medium">{value || 'N/A'}</span>
-      )
+      render: (value) => <span className="font-medium">{value || "N/A"}</span>,
     },
-    { 
-      label: "Email", 
+    {
+      label: "Email",
       accessor: "email",
       render: (value) => (
-        <span className="text-gray-600">{value || 'N/A'}</span>
-      )
+        <span className="text-gray-600">{value || "N/A"}</span>
+      ),
     },
-    { 
-      label: "Phone", 
+    {
+      label: "Phone",
       accessor: "phone",
       render: (value) => (
-        <span className="text-gray-600">{value || 'No phone provided'}</span>
-      )
+        <span className="text-gray-600">{value || "No phone provided"}</span>
+      ),
     },
-    { 
-      label: "Address", 
+    {
+      label: "Address",
       accessor: "address",
       render: (value) => {
-        if (!value) return <span className="text-gray-500">No address provided</span>;
-        return (
-          <span className="text-gray-600">
-            {value|| 'N/A'}
-          </span>
-        );
-      }
+        if (!value)
+          return <span className="text-gray-500">No address provided</span>;
+        return <span className="text-gray-600">{value || "N/A"}</span>;
+      },
     },
   ];
 
   const data = allCustomer.map((customer) => ({
-    customerName: customer?.firstName && customer?.lastName 
-      ? `${customer.firstName} ${customer.lastName}`
-      : 'N/A',
-    phone: customer?.phone || 'N/A',
-    email: customer?.email || 'N/A',
+    customerName:
+      customer?.firstName && customer?.lastName
+        ? `${customer.firstName} ${customer.lastName}`
+        : "N/A",
+    phone: customer?.phone || "N/A",
+    email: customer?.email || "N/A",
     address: customer?.address || null,
   }));
 
@@ -94,7 +90,7 @@ const Customer = () => {
     return (
       <div className="p-4 text-center">
         <div className="text-red-500 mb-4">{error}</div>
-        <button 
+        <button
           onClick={() => fetchCustomers(currentPage)}
           className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark"
         >
@@ -107,9 +103,9 @@ const Customer = () => {
   return (
     <div className="p-4">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-xl font-bold text-primary">All Customers</h1>
-        <div className="text-sm text-gray-500">
-          Total Customers: {totalItems}
+        <h1 className="md:text-xl font-bold text-primary">All Users</h1>
+        <div className="text-sm md:text-xl font-bold text-primary">
+          Total Users: {totalItems}
         </div>
       </div>
 
@@ -133,8 +129,10 @@ const Customer = () => {
         </div>
       ) : (
         <div className="text-center py-10 bg-white rounded-lg shadow">
-          <h2 className="text-lg text-gray-600">No Customers Yet</h2>
-          <p className="text-gray-400 mt-2">Customer data will appear here once available</p>
+          <h2 className="text-lg text-gray-600">No Users Yet</h2>
+          <p className="text-gray-400 mt-2">
+            Users data will appear here once available
+          </p>
         </div>
       )}
     </div>

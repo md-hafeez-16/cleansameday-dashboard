@@ -7,7 +7,6 @@ import axios from "axios";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { PencilOff, Trash2 } from "lucide-react";
-import { LiaEdit } from "react-icons/lia";
 
 const AllService = () => {
   const [allBooking, setAllBookings] = useState([]);
@@ -17,6 +16,8 @@ const AllService = () => {
   const [totalItems, setTotalItems] = useState(0);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [serviceIdToDelete, setServiceIdToDelete] = useState(null);
 
   const fetchBookings = async (page) => {
     setIsLoading(true);
@@ -54,15 +55,31 @@ const AllService = () => {
     navigate(`/editservice/${serviceId}`);
   };
 
-  const handleDelete = async (serviceId) => {
-    // Handle Delete button click
-    try {
-      await axios.delete(`${BASE_URL}/service/deleteService/${serviceId}`);
-      toast.success("Service deleted successfully");
-      fetchBookings(currentPage); // Refresh the list after deletion
-    } catch (error) {
-      toast.error("Failed to delete service");
+  const handleDeleteClick = (serviceId) => {
+    setServiceIdToDelete(serviceId);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (serviceIdToDelete) {
+      try {
+        await axios.delete(
+          `${BASE_URL}/service/deleteService/${serviceIdToDelete}`
+        );
+        toast.success("Service deleted successfully");
+        fetchBookings(currentPage); // Refresh the list after deletion
+      } catch (error) {
+        toast.error("Failed to delete service");
+      } finally {
+        setIsDeleteModalOpen(false);
+        setServiceIdToDelete(null);
+      }
     }
+  };
+
+  const handleDeleteCancel = () => {
+    setIsDeleteModalOpen(false);
+    setServiceIdToDelete(null);
   };
 
   const columns = [
@@ -96,7 +113,7 @@ const AllService = () => {
       render: (value) => <span className="font-medium">{value || "N/A"}</span>,
     },
     {
-      label: "Estimated Price",
+      label: "Estimate Price",
       accessor: "Price",
       render: (value) => (
         <span className="text-gray-600">{value || "No address provided"}</span>
@@ -131,14 +148,13 @@ const AllService = () => {
             onClick={() => handleEdit(row.ServiceId)}
             className="text-blue-500 hover:text-blue-700"
           >
-            {/* <PencilOff /> */}
-            <LiaEdit className="w-5 h-10" />
+            <PencilOff />
           </button>
           <button
-            onClick={() => handleDelete(row.ServiceId)}
+            onClick={() => handleDeleteClick(row.ServiceId)}
             className="text-red-500 hover:text-red-700"
           >
-            <Trash2 className="w-5 h-10" />
+            <Trash2 />
           </button>
         </div>
       ),
@@ -172,8 +188,10 @@ const AllService = () => {
   return (
     <div className="p-4">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-xl font-bold text-primary">All Service</h1>
-        <div className="text-sm text-gray-500">Total Service: {totalItems}</div>
+        <h1 className="md:text-xl font-bold text-primary">All Service</h1>
+        <div className="text-sm md:text-xl font-bold text-primary">
+          Total Service: {totalItems}
+        </div>
       </div>
 
       {isLoading ? (
@@ -199,6 +217,40 @@ const AllService = () => {
           <h2 className="text-lg text-gray-600">No Bookings Yet</h2>
         </div>
       )}
+
+      <DeleteConfirmationModal
+        isOpen={isDeleteModalOpen}
+        onClose={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+      />
+    </div>
+  );
+};
+
+const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <h2 className="text-lg font-bold mb-4">
+          Are you sure you want to delete this service?
+        </h2>
+        <div className="flex justify-end space-x-4">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={onConfirm}
+            className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
