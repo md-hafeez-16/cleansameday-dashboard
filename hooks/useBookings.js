@@ -1,7 +1,8 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import {
   fetchAllCompletedBookings,
   fetchAllPendingBookings,
+  handleCompleteBooking
 } from "../api/apiService";
 
 export const useCompletedBookings = () => {
@@ -10,4 +11,12 @@ export const useCompletedBookings = () => {
 
 export const usePendingBookings = () => {
   return useQuery("pendingBookings", fetchAllPendingBookings);
+};
+
+export const useCompleteBooking = (id) => {
+  return useQuery({
+    queryKey: ["completeBooking", id],
+    queryFn: () => handleCompleteBooking(id),
+    enabled: false,
+  });
 };

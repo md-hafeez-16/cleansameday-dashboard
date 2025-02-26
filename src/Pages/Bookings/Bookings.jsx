@@ -160,6 +160,7 @@ const Bookings = () => {
       accessor: "serviceName",
       render: (value) => <span className="font-medium">{value || "N/A"}</span>,
     },
+
     // {
     //   label: "Profile Picture",
     //   accessor: "profilePic",
@@ -207,6 +208,21 @@ const Bookings = () => {
     //   ),
     // },
     {
+      label: "Status",
+      accessor: "status",
+      render: (value) => (
+        <span
+          className={
+            value === "COMPLETED" || value === "CONFIRMED"
+              ? "text-green-600"
+              : "text-red-600"
+          }
+        >
+          {value || "N/A"}
+        </span>
+      ),
+    },
+    {
       label: "downloadInvoice",
       accessor: "downloadInvoice",
       render: (value) => (
@@ -240,6 +256,7 @@ const Bookings = () => {
     BookingDate: booking?.createdAt ? formatDate(booking.createdAt) : "N/A",
     BookingTime: booking?.time || "N/A",
     Bookingdetail: booking?._id || "N/A",
+    status: booking?.status || "N/A",
     downloadInvoice: booking || "N/A",
   }));
 
