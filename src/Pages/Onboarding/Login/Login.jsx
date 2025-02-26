@@ -147,7 +147,6 @@ const Login = () => {
               </div>
 
               {/* Forgot Password */}
-              {/* Forgot Password */}
               <div className="text-right">
                 <button
                   onClick={() => navigate("/forgot-password")}
