@@ -222,21 +222,21 @@ const Bookings = () => {
         </span>
       ),
     },
-    {
-      label: "downloadInvoice",
-      accessor: "downloadInvoice",
-      render: (value) => (
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            handleOpen(value);
-          }}
-          className="bg-primary text-white px-3 py-1 rounded"
-        >
-          View
-        </button>
-      ),
-    },
+    // {
+    //   label: "downloadInvoice",
+    //   accessor: "downloadInvoice",
+    //   render: (value) => (
+    //     <button
+    //       onClick={(e) => {
+    //         e.stopPropagation();
+    //         handleOpen(value);
+    //       }}
+    //       className="bg-primary text-white px-3 py-1 rounded"
+    //     >
+    //       View
+    //     </button>
+    //   ),
+    // },
   ];
 
   const data = allBooking?.map((booking) => ({
