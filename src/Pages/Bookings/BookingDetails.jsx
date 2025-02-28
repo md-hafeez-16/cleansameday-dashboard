@@ -10,9 +10,9 @@ const BookingDetails = () => {
   const [booking, setBooking] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-   const [isModalOpen, setIsModalOpen] = useState(false);
-    const [openModel, setOpenModel] = useState(false);
- const [amount, setAmount] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openModel, setOpenModel] = useState(false);
+  const [amount, setAmount] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [selectedBooking, setSelectedBooking] = useState(null);
   const {
@@ -26,10 +26,9 @@ const BookingDetails = () => {
     setOpenModel(false);
     setSelectedBooking(null);
   };
- 
+
   const handlePending = async () => {
     try {
-
       await completeBookingRefetch();
 
       await fetchBookingDetail();
@@ -40,7 +39,7 @@ const BookingDetails = () => {
   };
 
   const handleOpen = (value) => {
-    console.log(value, "value")
+    console.log(value, "value");
     setSelectedBooking(value);
     setOpenModel(true);
   };
@@ -50,7 +49,7 @@ const BookingDetails = () => {
       const { data } = await axios.get(
         `${BASE_URL}/booking/getBookingById/${id}`
       );
-      console.log(data)
+      console.log(data);
       setBooking(data.bookingDoc);
       setLoading(false);
     } catch (error) {
@@ -84,7 +83,7 @@ const BookingDetails = () => {
       link.setAttribute("download", `invoice_${value?.service?.name}.pdf`);
       document.body.appendChild(link);
       setOpenModel(false);
-      completeBookingRefetch()
+      completeBookingRefetch();
       link.click();
 
       // Clean up
@@ -97,7 +96,6 @@ const BookingDetails = () => {
       toast.error("Failed to Download Invoice");
     }
   };
-
 
   // Fetch booking details on component mount or when ID changes
   useEffect(() => {
@@ -217,21 +215,21 @@ const BookingDetails = () => {
             </button>
           )}
 
-
-<div className="flex justify-center items-center">
-<button
-          onClick={(e) => {
-            e.stopPropagation();
-            handleOpen(booking);
-          }}
-          className="bg-primary text-white px-3 py-2 rounded mt-5 "
-        >
-          Download Invoice 
-        </button>
-</div>
+          {booking.status === "COMPLETED" && (
+            <div className="flex justify-center items-center">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleOpen(booking);
+                }}
+                className="bg-primary text-white px-3 py-2 rounded mt-5 "
+              >
+                Download Invoice
+              </button>
+            </div>
+          )}
         </div>
       </div>
-
 
       {openModel && (
         <div
