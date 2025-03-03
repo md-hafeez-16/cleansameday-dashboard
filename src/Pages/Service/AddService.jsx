@@ -153,7 +153,7 @@ const AddService = () => {
                 htmlFor="imgUrl"
                 className="block text-sm font-medium text-gray-700"
               >
-                Image URL
+                Select atleast three images
               </label>
               <input
                 type="file"
@@ -168,22 +168,22 @@ const AddService = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-            {images.map((img, index) => (
-              <div key={index} className="relative flex justify-between">
-                <img
-                  src={img.preview}
-                  alt={`Room Image ${index + 1}`}
-                  className="h-44 w-full object-cover rounded-md"
-                />
-                <button
-                  type="button"
-                  onClick={() => removeImage(index)}
-                  className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 text-sm"
-                >
-                  ×
-                </button>
-              </div>
-            ))}
+              {images.map((img, index) => (
+                <div key={index} className="relative flex justify-between">
+                  <img
+                    src={img.preview}
+                    alt={`Room Image ${index + 1}`}
+                    className="h-44 w-full object-cover rounded-md"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeImage(index)}
+                    className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 text-sm"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
             </div>
 
             <button
