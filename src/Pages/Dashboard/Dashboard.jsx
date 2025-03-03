@@ -271,6 +271,7 @@ const Dashboard = () => {
       setIsLoading(true);
       try {
         const events = await axios.get(`${BASE_URL}/invoice/totalRevenue`);
+        console.log("events", events);
         setEventCount(events?.data?.totalRevenue);
 
         const coupons = await axios.get(`${BASE_URL}/booking/totalBookings`);
