@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const AddService = () => {
   const navigate = useNavigate();
+  const [images, setImages] = useState([]);
   const [formDate, setFormData] = useState({
     name: "",
     description: "",
@@ -19,18 +20,45 @@ const AddService = () => {
     setFormData({ ...formDate, [name]: value });
   };
 
+  const handleImageUpload = (e) => {
+    const files = Array.from(e.target.files);
+    const previews = files.map((file) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      return new Promise((resolve) => {
+        reader.onloadend = () => resolve({ file, preview: reader.result });
+      });
+    });
+
+    Promise.all(previews).then((imageData) =>
+      setImages((prev) => [...prev, ...imageData])
+    );
+  };
+
+  const removeImage = (index) => {
+    setImages((prev) => prev.filter((_, i) => i !== index));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const reqBody = {
-      name: formDate.name,
-      description: formDate.description,
-      duration: formDate.duration,
-      price: formDate.price,
-      imgUrl: formDate.image,
-    };
-    console.log(reqBody);
 
     try {
+      const uploadedImageUrls = await Promise.all(
+        images.map(async (img) => {
+          const url = await uploadToAzureStorage(img.file);
+          return url;
+        })
+      );
+
+      const reqBody = {
+        name: formDate.name,
+        description: formDate.description,
+        duration: formDate.duration,
+        price: formDate.price,
+        imgUrl: uploadedImageUrls,
+      };
+      console.log(reqBody);
       const res = await axios.post(`${BASE_URL}/service/addService`, reqBody);
       console.log(res.data);
       toast.success("Service Added Successfully");
@@ -39,14 +67,6 @@ const AddService = () => {
       console.log(error);
       toast.error("Failed to Add Service");
     }
-  };
-
-  const handleImage = async (e) => {
-    const file = e.target.files[0];
-
-    const image = await uploadToAzureStorage(file, file.name);
-    console.log(image);
-    setFormData({ ...formDate, image: image });
   };
 
   return (
@@ -138,22 +158,33 @@ const AddService = () => {
               <input
                 type="file"
                 id="imgUrl"
+                accept="image/*"
                 name="imgUrl"
-                onChange={handleImage}
+                multiple
+                onChange={handleImageUpload}
                 placeholder="Enter image URL"
                 className="mt-1 block w-full border border-gray-300 rounded-md p-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
               />
             </div>
 
-            {formDate.image && (
-              <div className="mb-6">
+            <div className="grid grid-cols-2 gap-4">
+            {images.map((img, index) => (
+              <div key={index} className="relative flex justify-between">
                 <img
-                  alt="Service"
-                  src={formDate.image}
-                  className="w-full h-auto rounded-md shadow-md"
+                  src={img.preview}
+                  alt={`Room Image ${index + 1}`}
+                  className="h-44 w-full object-cover rounded-md"
                 />
+                <button
+                  type="button"
+                  onClick={() => removeImage(index)}
+                  className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 text-sm"
+                >
+                  ×
+                </button>
               </div>
-            )}
+            ))}
+            </div>
 
             <button
               type="submit"

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BASE_URL } from "../../constants";
 import uploadToAzureStorage from "../../Utils/UploadToAzureStorage";
@@ -7,12 +7,12 @@ import toast from "react-hot-toast";
 
 const EditService = () => {
   const { id } = useParams();
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     name: "",
     description: "",
     price: "",
     duration: "",
-    imgUrl: "",
+    imgUrl: [],
   });
 
   const navigate = useNavigate();
@@ -25,8 +25,10 @@ const EditService = () => {
   const fetchServiceById = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/service/getServiceById/${id}`);
-      console.log(res.data);
-      setFormData(res.data.serviceDoc);
+      setFormData({
+        ...res.data.serviceDoc,
+        imgUrl: res.data.serviceDoc.imgUrl || [],
+      });
     } catch (error) {
       console.log(error);
     }
@@ -40,17 +42,11 @@ const EditService = () => {
       description: formData.description,
       duration: formData.duration,
       price: formData.price,
-      imgUrl: formData.imgUrl,
+      imgUrl: formData.imgUrl, // Send images as an array
     };
 
-    console.log(reqbody);
-
     try {
-      const res = await axios.post(
-        `${BASE_URL}/service/updateService`,
-        reqbody
-      );
-      console.log(res.data);
+      await axios.post(`${BASE_URL}/service/updateService`, reqbody);
       toast.success("Service Updated Successfully");
       navigate("/service");
     } catch (error) {
@@ -59,25 +55,39 @@ const EditService = () => {
     }
   };
 
-  const handleImage = async (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
+    if (!file) return;
 
-    const image = await uploadToAzureStorage(file, file.name);
-    console.log(image);
-    setFormData({ ...formData, image: image });
+    try {
+      const imageUrl = await uploadToAzureStorage(file, file.name);
+      setFormData((prev) => ({
+        ...prev,
+        imgUrl: [...prev.imgUrl, imageUrl], // Add new image to the array
+      }));
+    } catch (error) {
+      console.log(error);
+      toast.error("Image upload failed");
+    }
+  };
+
+  const handleRemoveImage = (index) => {
+    setFormData((prev) => ({
+      ...prev,
+      imgUrl: prev.imgUrl.filter((_, i) => i !== index), // Remove selected image
+    }));
   };
 
   useEffect(() => {
     fetchServiceById();
   }, [id]);
+
   return (
     <div className="w-full max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
       <form onSubmit={handleSubmit}>
+        {/* Service Name */}
         <div className="mb-4">
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
             Service Name
           </label>
           <input
@@ -91,11 +101,9 @@ const EditService = () => {
           />
         </div>
 
+        {/* Description */}
         <div className="mb-4">
-          <label
-            htmlFor="description"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="description" className="block text-sm font-medium text-gray-700">
             Description
           </label>
           <textarea
@@ -109,12 +117,10 @@ const EditService = () => {
           />
         </div>
 
+        {/* Price & Duration */}
         <div className="mb-4 grid grid-cols-2 gap-4">
           <div>
-            <label
-              htmlFor="price"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="price" className="block text-sm font-medium text-gray-700">
               Price (AED)
             </label>
             <input
@@ -129,10 +135,7 @@ const EditService = () => {
           </div>
 
           <div>
-            <label
-              htmlFor="duration"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="duration" className="block text-sm font-medium text-gray-700">
               Duration
             </label>
             <input
@@ -147,33 +150,43 @@ const EditService = () => {
           </div>
         </div>
 
+        {/* Image Upload */}
         <div className="mb-4">
-          <label
-            htmlFor="imgUrl"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Image URL
+          <label htmlFor="imgUrl" className="block text-sm font-medium text-gray-700">
+            Upload Images
           </label>
           <input
             type="file"
             id="imgUrl"
-            onChange={handleImage}
+            onChange={handleImageUpload}
             name="imgUrl"
-            placeholder="Enter image URL"
             className="mt-1 block w-full border border-gray-300 rounded-md p-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
           />
         </div>
 
-        {formData.imgUrl && (
-          <div className="mb-6">
-            <img
-              alt="Service"
-              src={formData.imgUrl}
-              className="w-full h-52 rounded-md shadow-md"
-            />
+        {/* Image Preview & Remove */}
+        {formData.imgUrl.length > 0 && (
+          <div className="mb-6 grid grid-cols-2 gap-4">
+            {formData.imgUrl.map((image, index) => (
+              <div key={index} className="relative">
+                <img
+                  alt="Service"
+                  src={image}
+                  className="w-full h-52 rounded-md shadow-md object-cover"
+                />
+                <button
+                  type="button"
+                  onClick={() => handleRemoveImage(index)}
+                  className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 text-xs rounded-full"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
           </div>
         )}
 
+        {/* Submit Button */}
         <button
           type="submit"
           className="w-full py-3 mt-4 bg-indigo-600 text-white font-semibold rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
