@@ -178,7 +178,7 @@ const AddService = () => {
                 htmlFor="imgUrl"
                 className="block text-sm font-medium text-gray-700"
               >
-                Image URL
+                Select atleast three images
               </label>
               <input
                 type="file"
