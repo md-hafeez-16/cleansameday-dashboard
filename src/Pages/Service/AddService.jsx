@@ -11,11 +11,12 @@ const AddService = () => {
   const [formDate, setFormData] = useState({
     name: "",
     description: "",
-    category: "",
+    category: "", // Ensure category is part of the initial state
     duration: "",
     price: "",
     image: "",
   });
+
   const handleInput = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formDate, [name]: value });
@@ -56,7 +57,7 @@ const AddService = () => {
         name: formDate.name,
         description: formDate.description,
         duration: formDate.duration,
-        category: formDate.category,
+        category: formDate.category, // Include category in the request body
         price: formDate.price,
         imgUrl: uploadedImageUrls,
       };
@@ -112,22 +113,21 @@ const AddService = () => {
               />
             </div>
 
-            <div className="w-full ">
+            <div className="w-full mb-4">
               <label
-                htmlFor="price"
+                htmlFor="category"
                 className="block text-sm font-medium text-gray-700"
               >
-                Service
+                Category
               </label>
-
               <select
-                className="w-full p-3 border border-gray-300 mb-2"
-                name="cars"
-                id="cars"
+                className="w-full p-3 border border-gray-300 rounded-md"
+                name="category"
+                id="category"
                 value={formDate.category}
                 onChange={handleInput}
               >
-                <option value="category">category</option>
+                <option value="">Select a category</option>
                 <option value="CLEANING SERVICE">CLEANING SERVICE</option>
                 <option value="DEEP CLEANING SERVICE">
                   DEEP CLEANING SERVICE
@@ -178,7 +178,7 @@ const AddService = () => {
                 htmlFor="imgUrl"
                 className="block text-sm font-medium text-gray-700"
               >
-                Select atleast three images
+                Select at least three images
               </label>
               <input
                 type="file"
