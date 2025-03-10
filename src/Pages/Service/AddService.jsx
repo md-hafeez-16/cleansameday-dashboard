@@ -11,6 +11,7 @@ const AddService = () => {
   const [formDate, setFormData] = useState({
     name: "",
     description: "",
+    category: "",
     duration: "",
     price: "",
     image: "",
@@ -55,6 +56,7 @@ const AddService = () => {
         name: formDate.name,
         description: formDate.description,
         duration: formDate.duration,
+        category: formDate.category,
         price: formDate.price,
         imgUrl: uploadedImageUrls,
       };
@@ -108,6 +110,29 @@ const AddService = () => {
                 rows="4"
                 className="mt-1 block w-full border border-gray-300 rounded-md p-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
               />
+            </div>
+
+            <div className="w-full ">
+              <label
+                htmlFor="price"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Service
+              </label>
+
+              <select
+                className="w-full p-3 border border-gray-300 mb-2"
+                name="cars"
+                id="cars"
+                value={formDate.category}
+                onChange={handleInput}
+              >
+                <option value="category">category</option>
+                <option value="CLEANING SERVICE">CLEANING SERVICE</option>
+                <option value="DEEP CLEANING SERVICE">
+                  DEEP CLEANING SERVICE
+                </option>
+              </select>
             </div>
 
             <div className="mb-4 grid md:grid-cols-2 gap-4">

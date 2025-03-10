@@ -87,7 +87,10 @@ const EditService = () => {
       <form onSubmit={handleSubmit}>
         {/* Service Name */}
         <div className="mb-4">
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700"
+          >
             Service Name
           </label>
           <input
@@ -103,7 +106,10 @@ const EditService = () => {
 
         {/* Description */}
         <div className="mb-4">
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="description"
+            className="block text-sm font-medium text-gray-700"
+          >
             Description
           </label>
           <textarea
@@ -120,7 +126,10 @@ const EditService = () => {
         {/* Price & Duration */}
         <div className="mb-4 grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="price" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="price"
+              className="block text-sm font-medium text-gray-700"
+            >
               Price (AED)
             </label>
             <input
@@ -134,8 +143,13 @@ const EditService = () => {
             />
           </div>
 
+          
+
           <div>
-            <label htmlFor="duration" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="duration"
+              className="block text-sm font-medium text-gray-700"
+            >
               Duration
             </label>
             <input
@@ -152,7 +166,10 @@ const EditService = () => {
 
         {/* Image Upload */}
         <div className="mb-4">
-          <label htmlFor="imgUrl" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="imgUrl"
+            className="block text-sm font-medium text-gray-700"
+          >
             Upload Images
           </label>
           <input
@@ -160,7 +177,7 @@ const EditService = () => {
             id="imgUrl"
             onChange={handleImageUpload}
             name="imgUrl"
-            className="mt-1 block w-full border border-gray-300 rounded-md p-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1  block w-full  border border-gray-300 rounded-md p-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
           />
         </div>
 
