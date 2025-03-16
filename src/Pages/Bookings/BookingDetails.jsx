@@ -107,7 +107,7 @@ const BookingDetails = () => {
     return <div className="text-center mt-8 text-red-500">{error}</div>;
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container  mt-10 mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-8">Booking Details</h1>
       <div className="bg-white shadow-lg rounded-lg p-6">
         {/* User Information */}
@@ -130,23 +130,24 @@ const BookingDetails = () => {
           <h2 className="text-2xl font-semibold mb-4">Service Information</h2>
           <p className="text-gray-700">
             <span className="font-medium">Service Name:</span>{" "}
-            {booking.service.name}
+            {booking?.service?.name}
           </p>
           <p className="text-gray-700">
             <span className="font-medium">Description:</span>{" "}
-            {booking.service.description}
+            {booking?.service?.description}
           </p>
           <p className="text-gray-700">
-            <span className="font-medium">Price:</span> ${booking.service.price}
+            <span className="font-medium">Price:</span> $
+            {booking?.service?.price}
           </p>
           <p className="text-gray-700">
             <span className="font-medium">Duration:</span>{" "}
-            {booking.service.duration}
+            {booking?.service?.duration}
           </p>
           <div className="mt-4">
             <img
-              src={booking.service.imgUrl[0]}
-              alt={booking.service.name}
+              src={booking?.service?.imgUrl[0]}
+              alt={booking?.service?.name}
               className="w-full h-64 object-cover rounded-lg"
             />
           </div>

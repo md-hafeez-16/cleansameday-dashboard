@@ -281,7 +281,6 @@ const Dashboard = () => {
           `${BASE_URL}/booking/getCompletedBookingsCount`
         );
 
-        
         setTicketsCount(data?.count);
 
         const pendingCount = await axios.get(

@@ -101,7 +101,7 @@ const Customer = () => {
   }
 
   return (
-    <div className="p-4">
+    <div className="p-4  mt-10">
       <div className="flex justify-between items-center mb-6">
         <h1 className="md:text-xl font-bold text-primary">All Users</h1>
         <div className="text-sm md:text-xl font-bold text-primary">

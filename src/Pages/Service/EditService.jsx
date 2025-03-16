@@ -11,7 +11,7 @@ const EditService = () => {
     name: "",
     description: "",
     price: "",
-    category:"",
+    category: "",
     duration: "",
     imgUrl: [],
   });
@@ -27,7 +27,7 @@ const EditService = () => {
     try {
       const res = await axios.get(`${BASE_URL}/service/getServiceById/${id}`);
 
-      console.log(res.data)
+      console.log(res.data);
       setFormData({
         ...res.data.serviceDoc,
         imgUrl: res.data.serviceDoc.imgUrl || [],
@@ -44,12 +44,12 @@ const EditService = () => {
       name: formData.name,
       description: formData.description,
       duration: formData.duration,
-      category:formData.category,
+      category: formData.category,
       price: formData.price,
       imgUrl: formData.imgUrl, // Send images as an array
     };
 
-    console.log(reqbody)
+    console.log(reqbody);
 
     try {
       await axios.post(`${BASE_URL}/service/updateService`, reqbody);
@@ -89,7 +89,7 @@ const EditService = () => {
   }, [id]);
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="w-full max-w-4xl mx-auto p-6  mt-14 bg-white rounded-lg shadow-md">
       <form onSubmit={handleSubmit}>
         {/* Service Name */}
         <div className="mb-4">
@@ -130,26 +130,24 @@ const EditService = () => {
         </div>
 
         <div className="w-full mb-4">
-              <label
-                htmlFor="category"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Category
-              </label>
-              <select
-                className="w-full p-3 border border-gray-300 rounded-md"
-                name="category" 
-                id="category"
-                value={formData.category}
-                onChange={handleInput}
-              >
-                <option value="">Select a category</option> 
-                <option value="CLEANING SERVICE">CLEANING SERVICE</option>
-                <option value="DEEP CLEANING SERVICE">
-                  DEEP CLEANING SERVICE
-                </option>
-              </select>
-            </div>
+          <label
+            htmlFor="category"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Category
+          </label>
+          <select
+            className="w-full p-3 border border-gray-300 rounded-md"
+            name="category"
+            id="category"
+            value={formData.category}
+            onChange={handleInput}
+          >
+            <option value="">Select a category</option>
+            <option value="CLEANING SERVICE">CLEANING SERVICE</option>
+            <option value="DEEP CLEANING SERVICE">DEEP CLEANING SERVICE</option>
+          </select>
+        </div>
 
         {/* Price & Duration */}
         <div className="mb-4 grid grid-cols-2 gap-4">
@@ -170,8 +168,6 @@ const EditService = () => {
               className="mt-1 block w-full border border-gray-300 rounded-md p-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
-
-          
 
           <div>
             <label

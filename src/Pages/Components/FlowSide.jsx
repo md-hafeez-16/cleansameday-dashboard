@@ -116,7 +116,7 @@ const FlowSide = () => {
   ];
 
   const SidebarContent = () => (
-    <Card className="h-full w-60 p-2 rounded-none border-r bg-white shadow-xl overflow-y-auto overflow-x-hidden">
+    <Card className="h-full w-60 p-2 mt-10 rounded-none border-r bg-white shadow-xl overflow-y-auto overflow-x-hidden">
       <div className="mb-2"></div>
       <List>
         {sidebarItems.map((item, index) => (
@@ -223,7 +223,7 @@ const FlowSide = () => {
       >
         <div className="mx-auto flex items-center justify-between text-primary">
           <div className="flex items-center justify-center gap-1 cursor-pointer">
-            <img src={dummylogo} alt="ETB" className=" w-24  rounded-md" />
+            <img src={dummylogo} alt="ETB" className=" w-36  rounded-md" />
             {/* <h1 className="text-white">Clean Same Day</h1> */}
             {/* <Typography
     as="a"

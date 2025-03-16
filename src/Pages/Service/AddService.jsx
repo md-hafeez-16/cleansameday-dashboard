@@ -74,7 +74,7 @@ const AddService = () => {
 
   return (
     <>
-      <div className="py-10 p-5">
+      <div className="py-14 p-5">
         <div className="w-full max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
